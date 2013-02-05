@@ -1,0 +1,344 @@
+/* General styles */
+
+body
+{
+	background: white;
+	/* ??
+	padding-top: 40px;
+	padding-bottom: 0px; */
+}
+
+.ac  /* align center */
+{
+	text-align: center;
+}
+
+.al /* align left */
+{
+	text-align: left;
+}
+
+.ar /* align right */
+{
+	text-align: right;
+}
+
+/* Noscript styles */
+
+#noscript-warning 
+{
+	font-family: sans-serif;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 101;
+	text-align: center;
+	font-weight: bold;
+	font-size: 120%;
+	color: #fff;
+	background-color: #AE0000;
+	padding: 5px 0 5px 0;
+}
+#noscript-padding 
+{
+	padding-top: 3.5em;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+	color: #ff0000;
+}
+
+.field-validation-valid
+{
+	display: none;
+}
+
+.input-validation-error
+{
+	border: 1px solid #ff0000;
+	background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.validation-summary-valid
+{
+	display: none;
+}
+
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label,
+.editor-label,
+.display-field,
+.editor-field
+{
+	margin: 0.5em 0;
+}
+
+.text-box
+{
+	width: 30em;
+}
+
+.text-box.multi-line
+{
+	height: 6.5em;
+}
+
+.tri-state
+{
+	width: 6em;
+}
+
+kbd {
+	padding: 2px 4px;
+	white-space: nowrap;
+	color: #000;
+	background: #eee;
+	border-width: 1px 3px 3px 1px;
+	border-style: solid;
+	border-color: #ccc #aaa #888 #bbb;
+}
+.lsep { /* link seperator: "|" */
+	margin: 0 2px 0 2px;
+	color: #ccc;
+	font-size: 110%;
+}
+
+
+#system-message
+{
+  clear:both;
+  text-align:center;
+  margin:0 0 10px;
+  padding:7px;
+  font-weight:700;
+  color:#735005;
+  background-color:#ffefc6;
+}
+
+#system-message a
+{
+  color:#735005;
+  text-decoration:underline;
+}
+
+/* Bootstrap 2 addons */
+
+.btn-xlarge { /* extra-large button */
+  font-size: 20px;
+  font-weight: normal;
+  padding: 14px 24px;
+  margin-right: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+/* extra-large type, from bs2/docs.css jumbotron stuff */
+h1.xlarge, h1.hero {
+  margin-bottom: 9px;
+  font-size: 81px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+p.xlarge, p.hero {
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+/* hero sections */
+.hero-section
+{
+	border-top: 3px solid #EBEBEB;
+	border-bottom: 1px solid #E1E1E1;
+	margin-bottom: 30px;
+	padding: 40px 0 31px;
+}
+
+.announcement
+{
+	color: #454545;
+	margin-bottom: 0;
+	line-height: 1;
+	letter-spacing: -1px;
+	padding-bottom: +10px;
+}
+
+h2.announcement
+{
+	font-size: 32px;
+}
+
+h3.announcement
+{
+	font-size: 24px;
+	color: #999;
+	margin-top: 10px;
+}
+
+footer {
+    background-color: #f5f5f5; /* 252525 */
+    color: #999;
+}
+
+/* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+
+
+.hero-section
+{
+	margin-top: -20px;
+	/* margin-bottom: +50px; */
+}
+
+footer a
+{
+	color: #fff;
+}
+
+footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* controls */
+
+blockquote.big-quote
+{
+	background:url("../img/quote.png") 0 0 no-repeat;
+	border-left:none;
+	padding-left:90px;
+}
+blockquote.big-quote small
+{
+	font-size:14px;
+	font-weight:300;
+	line-height:20px;
+}
+
+.inner-well
+{
+	background-color:#fcfcfc;
+    margin: 10px 0 20px;
+	padding: 19px;
+	min-height: 20px;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+    border-radius: 4px
+}
+
+/* font awesome icon spacing */
+
+.icon
+{
+	margin-right: +10px;
+}
+
+/* form styles */
+
+.help-block
+{
+	opacity:.5;
+}
+
+.infoTitle
+{
+	color: #C06;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+small
+{
+	font-family: 'Chicle', cursive;
+	font-size:16px;
+}
+.copyright
+{
+    font-family: 'Chicle', cursive;
+    font-size: 14px;
+    padding-top: 1em;
+}
+.foot-social-buttons
+{
+    padding-top: 1em;
+}
+.endwell h3, .footerbtn
+{
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-size: 24px;
+}
+
+#subwrap
+{
+	background: white;
+	/* margin-top: -20px; */
+	padding-top: 2em;
+}
+			
+/* Portrait tablet to landscape and desktop */
+@@media (min-width: 979px)
+{
+	#subwrap
+	{
+		padding-bottom: 60px;
+		padding-top: +60px;
+		margin-top: 0;
+	}
+    .jumbotron
+    {
+            margin-top: -60px;
+    }
+
+}
+  			
+[class^="icon-"], [class*=" icon-"] { /* font-awesome fix https://github.com/FortAwesome/Font-Awesome/issues/6, be sure to download Bootstrap with Icons option deselected */
+    background-image:none;
+}
+
+/* Specific page styles */
+
+.breadcrumb {
+    margin-top: 2em;
+}
