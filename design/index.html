@@ -78,17 +78,26 @@
 
   
 <div class="container" id="main">
-            
-<form class="form-inline">
-	<div class="row">
-	  <div class="span6 ac">
-		<input type="text" class="input-large" placeholder="Name">
-	  </div>
-	  <div class="span3 ac">
-		<input type="text" class="input-small" placeholder="Grade">
-	  </div>
-	  <div class="span3 ac">
-		  <label class="radio">
+
+<div class="row">
+<div class="span9">
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="name">Name</label>
+    <div class="controls">
+      <input type="text" id="name" placeholder="Name">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="grade">Grade</label>
+    <div class="controls">
+      <input type="text" id="grade" placeholder="Grade">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+      <label class="radio">
 			  <input type="radio" name="sexRadio" id="sexRadioMale" value="Male" checked>
 			  I am male
 		  </label>
@@ -96,13 +105,44 @@
 			  <input type="radio" name="sexRadio" id="sexRadioFemale" value="Female">
 			  I am female
 		  </label>
-	  </div>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="q1">Question 1</label>
+    <div class="controls">
+      <label class="radio">
+			  <input type="radio" name="Question1" value="A1">
+			  Answer 1
+		  </label>
+		  <label class="radio">
+			  <input type="radio" name="Question1" value="A2">
+			  Answer 2
+		  </label>
+		  <label class="radio">
+			  <input type="radio" name="Question1" value="A3">
+			  Answer 3
+		  </label>
+		  <label class="radio">
+			  <input type="radio" name="Question1" value="A4">
+			  Answer 4
+		  </label>
+    </div>
+  </div>
+  
+  
+  <div class="form-actions">
+		<button type="submit" class="btn btn-large btn-primary">Save changes</button>
+		<button type="button" class="btn btn-large btn-success">Finish</button>
 	</div>
 </form>
+</div>
+<div class="span3">
+<h3>Explanation</h3>
+<p>My lovely text here</p>
+</div>
+<!--
 
-<form class="form-inline">
-    <div class="row">
-	<div class="span3">
 		<h2>Question 1</h2>
     </div>
     	<div class="row">
@@ -147,7 +187,7 @@
 		<a class="btn btn-primary btn-xlarge" href="/something2" id="view2Btn">Add Something</a>
 	</div>
 </div>
-
+-->
         </div>
         </div>
         <div class="push"></div> <!-- sticky footer -->
