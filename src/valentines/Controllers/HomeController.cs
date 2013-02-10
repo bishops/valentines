@@ -24,7 +24,8 @@ namespace valentines.Controllers
             return View();
         }
 
-        public virtual ActionResult Contact()
+        [Url("results")]
+        public virtual ActionResult Results()
         {
             ViewBag.Message = "Your contact page.";
 

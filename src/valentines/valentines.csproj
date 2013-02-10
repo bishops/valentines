@@ -312,20 +312,23 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <Content Include="static\img\accent.png" />
-    <Content Include="static\img\bullet.png" />
-    <Content Include="static\img\heroAccent.png" />
-    <Content Include="static\img\orderedList0.png" />
-    <Content Include="static\img\orderedList1.png" />
-    <Content Include="static\img\orderedList2.png" />
-    <Content Include="static\img\orderedList3.png" />
-    <Content Include="static\img\orderedList4.png" />
-    <Content Include="static\img\orderedList5.png" />
-    <Content Include="static\img\orderedList6.png" />
-    <Content Include="static\img\orderedList7.png" />
-    <Content Include="static\img\orderedList8.png" />
-    <Content Include="static\img\orderedList9.png" />
+    <Content Include="static\css\bootstrap.css" />
+    <Content Include="static\css\bootstrap.min.css" />
+    <Content Include="static\css\font-awesome-ie7.min.css" />
+    <Content Include="static\css\font-awesome.css" />
+    <Content Include="static\css\font-awesome.min.css" />
+    <Content Include="static\css\style.css" />
+    <Content Include="static\font\fontawesome-webfont.svg" />
+    <Content Include="static\img\glyphicons-halflings-white.png" />
+    <Content Include="static\img\glyphicons-halflings.png" />
+    <Content Include="static\js\bootstrap.js" />
+    <Content Include="static\js\bootstrap.min.js" />
+    <Content Include="static\js\dd_belatedpng.js" />
+    <Content Include="static\js\jquery-1.7.1.min.js" />
+    <Content Include="static\js\modernizr-1.7.js" />
+    <Content Include="static\js\modernizr-1.7.min.js" />
     <Content Include="static\openid\aol.gif" />
+    <Content Include="static\openid\bishops.gif" />
     <Content Include="static\openid\blogger.ico" />
     <Content Include="static\openid\claimid.ico" />
     <Content Include="static\openid\facebook.gif" />
@@ -375,14 +378,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="static\css\" />
-    <Folder Include="static\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -408,6 +408,8 @@
     <Content Include="Views\Account\OpenidLogin.cshtml" />
     <Content Include="Views\Account\OpenidRegister.cshtml" />
     <Content Include="Views\Account\WhiteListBlock.cshtml" />
+    <Content Include="Views\Shared\NavPartial.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
