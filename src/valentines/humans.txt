@@ -1,0 +1,24 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  The Bishop's School Programming Club
+  Site: bishops.com
+  Location: La Jolla, CA
+
+/* THANKS */
+  Names: 
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery
+  Software: ASP.NET MVC 3, SQL Server 2008, ASP.NET 4, WISC stack (Windows, IIS, SQL Server, C#).
+  
+
+					 ~~~~~~~         ~~~~~~
+				  ~~~~~~~~~~~~~~     ~~~~~~
+				 ~~~~~~    ~~~~~~   ~~~~~~
+				~~~~~~      ~~~~~~~~~~~~~
+				~~~~~~         ~~~~~~~
+				

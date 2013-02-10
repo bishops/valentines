@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 16.375, 16.625" name="Valentines">
+  <DataContextMoniker Name="/ValentinesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="bc57d286-5c45-4642-926a-e6b511baea76" absoluteBounds="0.75, 8.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_Application" />
+      <nestedChildShapes>
+        <elementListCompartment Id="52be14cc-068a-46ac-a7ea-86cde2da3b2d" absoluteBounds="0.765, 8.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6a0f05e2-3c5c-4ca0-a377-5f161ef030b1" absoluteBounds="0.75, 0.75, 2, 3.6939111328124996">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_WebEvent_Event" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fccc93f5-3ec7-4090-9999-d3fefc4c6d44" absoluteBounds="0.765, 1.21, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5fff6d73-e88a-4532-b750-fed4e7445f8a" absoluteBounds="9.25, 11, 2, 4.8477197265624987">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_Membership" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3fbe22af-cc11-4014-92ea-19f4a7c3891f" absoluteBounds="9.265, 11.46, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4b329068-3050-4356-b8dc-930b1f25b896" absoluteBounds="3.5, 5.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_Path" />
+      <nestedChildShapes>
+        <elementListCompartment Id="751e3c6b-f9ef-4bda-b507-8557ffd603bc" absoluteBounds="3.515, 5.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c0f6f419-e8f7-4a73-9b0c-6b18d232ee1d" absoluteBounds="6.25, 5.625, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_PersonalizationAllUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="82972991-c7ca-477d-99f4-ee64073047a6" absoluteBounds="6.265, 6.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="757e9d08-4f4b-467c-821c-c9530d34d7a9" absoluteBounds="9.25, 8.125, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_PersonalizationPerUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6dff3a7b-bada-410d-afe8-818e63c894b7" absoluteBounds="9.265, 8.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f06df581-a4ef-49f3-a434-75ac5b2f8b1c" absoluteBounds="6.25, 10.625, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_Profile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ef0d3a9a-0998-402f-b585-8aa1f8e2b02d" absoluteBounds="6.265, 11.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b4b8503a-249a-48f4-aee9-c2e87f074b9d" absoluteBounds="3.5, 7.875, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_Role" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6e522e51-a209-4514-940f-87962f8bb46c" absoluteBounds="3.515, 8.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8a4d4cad-5a26-462a-a0b3-0f7cb6569bad" absoluteBounds="3.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_SchemaVersion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="55efe928-b340-4177-8776-dd87b20815fa" absoluteBounds="3.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" absoluteBounds="3.5, 10.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ab595486-1460-449a-8f29-5a06eeac8d76" absoluteBounds="3.515, 10.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a04e0d80-f852-4884-96d1-9c60f437c374" absoluteBounds="6.25, 8.625, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/ValentinesDataContext/aspnet_UsersInRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="509f4c9b-5b0a-469a-b203-650a9ba19235" absoluteBounds="6.265, 9.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.48437375 : 9.82859537760417); (1.48437375 : 13.5777498372396); (4.41666666666667 : 13.5777498372396 : JumpStart); (4.58333333333333 : 13.5777498372396 : JumpEnd); (4.94791916666667 : 13.5777498372396 : JumpStart); (5.11458583333333 : 13.5777498372396 : JumpEnd); (9.25 : 13.5777498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_Application/aspnet_Application_aspnet_Membership" />
+      <nodes>
+        <classShapeMoniker Id="bc57d286-5c45-4642-926a-e6b511baea76" />
+        <classShapeMoniker Id="5fff6d73-e88a-4532-b750-fed4e7445f8a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 8.25); (1.75 : 6.28929768880208); (3.5 : 6.28929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_Application/aspnet_Application_aspnet_Path" />
+      <nodes>
+        <classShapeMoniker Id="bc57d286-5c45-4642-926a-e6b511baea76" />
+        <classShapeMoniker Id="4b329068-3050-4356-b8dc-930b1f25b896" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.31814697265625); (6.25 : 6.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_Path/aspnet_Path_aspnet_PersonalizationAllUser" />
+      <nodes>
+        <classShapeMoniker Id="4b329068-3050-4356-b8dc-930b1f25b896" />
+        <classShapeMoniker Id="c0f6f419-e8f7-4a73-9b0c-6b18d232ee1d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 7.07859537760417); (5.875 : 7.45359537760417); (5.875 : 7.75); (5.94791666666667 : 7.75 : JumpStart); (6.11458333333333 : 7.75 : JumpEnd); (8.32291666666667 : 7.75 : JumpStart); (8.48958333333333 : 7.75 : JumpEnd); (8.875 : 7.75); (9.25 : 8.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_Path/aspnet_Path_aspnet_PersonalizationPerUser" />
+      <nodes>
+        <classShapeMoniker Id="4b329068-3050-4356-b8dc-930b1f25b896" />
+        <classShapeMoniker Id="757e9d08-4f4b-467c-821c-c9530d34d7a9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 8.94794840494792); (3.5 : 8.94794840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_Application/aspnet_Application_aspnet_Role" />
+      <nodes>
+        <classShapeMoniker Id="bc57d286-5c45-4642-926a-e6b511baea76" />
+        <classShapeMoniker Id="b4b8503a-249a-48f4-aee9-c2e87f074b9d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 12.4944482421875); (9.25 : 12.4944482421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_User/aspnet_User_aspnet_Membership" />
+      <nodes>
+        <classShapeMoniker Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" />
+        <classShapeMoniker Id="5fff6d73-e88a-4532-b750-fed4e7445f8a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 10.4242297692308); (5.6875 : 10.2367297692308); (5.6875 : 10.2708968098958); (8.875 : 10.2708968098958); (9.25 : 9.89589680989583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_User/aspnet_User_aspnet_PersonalizationPerUser" />
+      <nodes>
+        <classShapeMoniker Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" />
+        <classShapeMoniker Id="757e9d08-4f4b-467c-821c-c9530d34d7a9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 11.5104484049479); (6.25 : 11.5104484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_User/aspnet_User_aspnet_Profile" />
+      <nodes>
+        <classShapeMoniker Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" />
+        <classShapeMoniker Id="f06df581-a4ef-49f3-a434-75ac5b2f8b1c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 9.82859537760417); (2.2812525 : 11.4527498372396); (3.5 : 11.4527498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_Application/aspnet_Application_aspnet_User" />
+      <nodes>
+        <classShapeMoniker Id="bc57d286-5c45-4642-926a-e6b511baea76" />
+        <classShapeMoniker Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 9.13544840494792); (5.94791666666667 : 9.13544840494792 : JumpStart); (6.11458333333333 : 9.13544840494792 : JumpEnd); (6.25 : 9.13544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_Role/aspnet_Role_aspnet_UsersInRole" />
+      <nodes>
+        <classShapeMoniker Id="b4b8503a-249a-48f4-aee9-c2e87f074b9d" />
+        <classShapeMoniker Id="a04e0d80-f852-4884-96d1-9c60f437c374" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 10.375); (5.875 : 10); (5.875 : 10.1939925130208); (6.25 : 9.81899251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_User/aspnet_User_aspnet_UsersInRole" />
+      <nodes>
+        <classShapeMoniker Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" />
+        <classShapeMoniker Id="a04e0d80-f852-4884-96d1-9c60f437c374" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="8da495d9-7fb4-430b-a574-1ffa79394fb6" absoluteBounds="6.25, 14.625, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/ValentinesDataContext/Match" />
+      <nestedChildShapes>
+        <elementListCompartment Id="addf386a-409d-44ff-a2e7-f5c40d8e79a0" absoluteBounds="6.265, 15.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9c1998d0-17ca-431e-82f0-1d4d930af0e7" absoluteBounds="9.25, 6.625, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ValentinesDataContext/Response" />
+      <nestedChildShapes>
+        <elementListCompartment Id="97df84c4-14d4-4ca9-be94-7f5de1b32926" absoluteBounds="9.265, 7.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="88033608-bbeb-4936-af8b-aace73361b98" absoluteBounds="6.5, 3.75, 2, 1.1939925130208331">
+      <DataClassMoniker Name="/ValentinesDataContext/Question" />
+      <nestedChildShapes>
+        <elementListCompartment Id="50422a7c-067a-47ab-81a1-fad070783d74" absoluteBounds="6.515, 4.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c4999a9f-85a4-4249-80f3-6fd0e6a0f703" absoluteBounds="6.5, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ValentinesDataContext/Answer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ad5e1032-a466-4b78-a3bc-2475c4077831" absoluteBounds="6.515, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.5 : 12.5304996744792); (4.5 : 15.5104484049479); (6.25 : 15.5104484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_User/aspnet_User_Match" />
+      <nodes>
+        <classShapeMoniker Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" />
+        <classShapeMoniker Id="8da495d9-7fb4-430b-a574-1ffa79394fb6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.0312525 : 12.5304996744792); (5.0312525 : 15.036471702474); (6.25 : 15.036471702474)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_User/aspnet_User_Match1" />
+      <nodes>
+        <classShapeMoniker Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" />
+        <classShapeMoniker Id="8da495d9-7fb4-430b-a574-1ffa79394fb6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.48153846153846 : 10.375); (6.03125 : 9.82528846153846); (6.03125 : 7.41189697265625); (8.32291666666667 : 7.41189697265625 : JumpStart); (8.48958333333333 : 7.41189697265625 : JumpEnd); (9.25 : 7.41189697265625)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/aspnet_User/aspnet_User_Response" />
+      <nodes>
+        <classShapeMoniker Id="ef0cbd6a-fdc1-4659-a630-ef52db1b0bcf" />
+        <classShapeMoniker Id="9c1998d0-17ca-431e-82f0-1d4d930af0e7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.40625 : 4.94399251302083); (8.40625 : 7.9062475); (8.94791416666667 : 7.9062475 : JumpStart); (9.11458083333333 : 7.9062475 : JumpEnd); (9.25 : 7.9062475)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/Question/Question_Response" />
+      <nodes>
+        <classShapeMoniker Id="88033608-bbeb-4936-af8b-aace73361b98" />
+        <classShapeMoniker Id="9c1998d0-17ca-431e-82f0-1d4d930af0e7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 1.53929768880208); (10.25 : 1.53929768880208); (10.25 : 6.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/Answer/Answer_Response" />
+      <nodes>
+        <classShapeMoniker Id="c4999a9f-85a4-4249-80f3-6fd0e6a0f703" />
+        <classShapeMoniker Id="9c1998d0-17ca-431e-82f0-1d4d930af0e7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.5 : 3.75); (7.5 : 2.32859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ValentinesDataContext/Question/Question_Answer" />
+      <nodes>
+        <classShapeMoniker Id="88033608-bbeb-4936-af8b-aace73361b98" />
+        <classShapeMoniker Id="c4999a9f-85a4-4249-80f3-6fd0e6a0f703" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="500373f4-6cc6-4bfe-a65c-e3c1cff05018" absoluteBounds="14.125, 5.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/ValentinesDataContext/OpenIDWhiteList" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8b153205-b749-4326-a85a-358f5ba98105" absoluteBounds="14.14, 5.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
