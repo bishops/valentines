@@ -182,17 +182,22 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ErrorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AccountProfile.cs" />
     <Compile Include="Helpers\ActionLinkExtensions.cs" />
     <Compile Include="Helpers\BishopsOpenID.cs" />
+    <Compile Include="Helpers\Crypto.cs" />
+    <Compile Include="Helpers\CustomAuthorizationAttribute.cs" />
     <Compile Include="Helpers\CustomCacheAttribute.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
     <Compile Include="Helpers\GlobalGzip.cs" />
     <Compile Include="Helpers\HtmlUtilities.cs" />
     <Compile Include="Helpers\Inflector.cs" />
-    <Compile Include="Helpers\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Helpers\IPBlacklist.cs" />
     <Compile Include="Helpers\RedirectPermanentResult.cs" />
     <Compile Include="Helpers\UniqueStringIDGenerator.cs" />
@@ -207,7 +212,8 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MagicStrings.cs" />
+    <Compile Include="Models\Matcher.cs" />
     <Compile Include="Models\SqlProfiling.cs" />
     <Compile Include="Models\Valentines.designer.cs">
       <AutoGen>True</AutoGen>
@@ -223,6 +229,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Account\OpenIdRegistrationViewModel.cs" />
     <Compile Include="ViewModels\SubmitViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +336,7 @@
     <Content Include="static\openid\myopenid.ico" />
     <Content Include="static\openid\myopenid.png" />
     <Content Include="static\openid\openid-inputicon.gif" />
+    <Content Include="static\openid\openid-jquery.js" />
     <Content Include="static\openid\openid-large.png" />
     <Content Include="static\openid\openid.css" />
     <Content Include="static\openid\openid.gif" />
@@ -363,15 +371,6 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -403,6 +402,12 @@
       <LastGenOutput>T4MVC1.cs</LastGenOutput>
     </None>
     <None Include="T4MVC.tt.settings.t4" />
+    <Content Include="Views\Home\Results.cshtml" />
+    <Content Include="Views\Home\ResultsComingSoon.cshtml" />
+    <Content Include="Views\Account\LogOff.cshtml" />
+    <Content Include="Views\Account\OpenidLogin.cshtml" />
+    <Content Include="Views\Account\OpenidRegister.cshtml" />
+    <Content Include="Views\Account\WhiteListBlock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

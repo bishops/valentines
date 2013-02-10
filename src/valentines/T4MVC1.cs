@@ -24,6 +24,7 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class MVC {
     public static valentines.Controllers.AccountController Account = new valentines.Controllers.T4MVC_AccountController();
+    public static valentines.Controllers.ErrorController Error = new valentines.Controllers.T4MVC_ErrorController();
     public static valentines.Controllers.HomeController Home = new valentines.Controllers.T4MVC_HomeController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }

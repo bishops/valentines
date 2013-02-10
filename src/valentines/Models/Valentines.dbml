@@ -132,6 +132,7 @@
       <Association Name="aspnet_User_Response" Member="Responses" ThisKey="UserId" OtherKey="UserId" Type="Response" />
       <Association Name="aspnet_User_Match" Member="Matches" ThisKey="UserId" OtherKey="MatchedUser" Type="Match" />
       <Association Name="aspnet_User_Match1" Member="Match" ThisKey="UserId" OtherKey="RequestUser" Type="Match" Cardinality="One" />
+      <Association Name="aspnet_User_UserOpenId" Member="UserOpenIds" ThisKey="UserId" OtherKey="UserId" Type="UserOpenId" />
       <Association Name="aspnet_Application_aspnet_User" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
     </Type>
   </Table>
@@ -189,6 +190,34 @@
       <Column Name="AreSameGrade" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="aspnet_User_Match" Member="aspnet_User" ThisKey="MatchedUser" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
       <Association Name="aspnet_User_Match1" Member="aspnet_User1" ThisKey="RequestUser" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OneTimeRegistrationCodes" Member="OneTimeRegistrationCodes">
+    <Type Name="OneTimeRegistrationCode">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomWelcomeName" Type="System.String" DbType="NVarChar(400)" CanBeNull="true" />
+      <Column Name="UsesRemaining" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MiniProfilerResults" Member="MiniProfilerResults">
+    <Type Name="MiniProfilerResult">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Results" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OpenIDWhiteList" Member="OpenIDWhiteList1s">
+    <Type Name="OpenIDWhiteList1">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OpenID" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
+      <Column Name="IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserOpenIds" Member="UserOpenIds">
+    <Type Name="UserOpenId">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OpenIdClaim" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_UserOpenId" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

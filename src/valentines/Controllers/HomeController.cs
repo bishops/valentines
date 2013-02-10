@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RiaLibrary.Web;
+using valentines.Models;
 
 namespace valentines.Controllers
 {
@@ -27,6 +29,14 @@ namespace valentines.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [Url("matches/make")]
+        public virtual ActionResult ComputeMatches()
+        {
+            Matcher m = new Matcher(Current.DB);
+            m.computeMatches();
+            return Content("Done.");
         }
     }
 }

@@ -21,12 +21,12 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
 namespace valentines.Controllers {
-    public partial class HomeController {
+    public partial class ErrorController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public HomeController() { }
+        public ErrorController() { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected HomeController(Dummy d) { }
+        protected ErrorController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -42,21 +42,24 @@ namespace valentines.Controllers {
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public HomeController Actions { get { return MVC.Home; } }
+        public ErrorController Actions { get { return MVC.Error; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Home";
+        public readonly string Name = "Error";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
-            public readonly string About = "About";
-            public readonly string Contact = "Contact";
-            public readonly string ComputeMatches = "ComputeMatches";
+            public readonly string NotFound = "NotFound";
+            public readonly string Forbidden = "Forbidden";
+            public readonly string Unauthorized = "Unauthorized";
+            public readonly string Conflict = "Conflict";
+            public readonly string InternalServerError = "InternalServerError";
+            public readonly string BadRequest = "BadRequest";
+            public readonly string AnyError = "AnyError";
         }
 
 
@@ -65,35 +68,45 @@ namespace valentines.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string About = "~/Views/Home/About.cshtml";
-            public readonly string Contact = "~/Views/Home/Contact.cshtml";
-            public readonly string Index = "~/Views/Home/Index.cshtml";
-            public readonly string Results = "~/Views/Home/Results.cshtml";
-            public readonly string ResultsComingSoon = "~/Views/Home/ResultsComingSoon.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_HomeController: valentines.Controllers.HomeController {
-        public T4MVC_HomeController() : base(Dummy.Instance) { }
+    public class T4MVC_ErrorController: valentines.Controllers.ErrorController {
+        public T4MVC_ErrorController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+        public override System.Web.Mvc.ActionResult NotFound() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.NotFound);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult About() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.About);
+        public override System.Web.Mvc.ActionResult Forbidden() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Forbidden);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Contact() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Contact);
+        public override System.Web.Mvc.ActionResult Unauthorized() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Unauthorized);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ComputeMatches() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ComputeMatches);
+        public override System.Web.Mvc.ActionResult Conflict() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Conflict);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult InternalServerError() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.InternalServerError);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult BadRequest() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.BadRequest);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult AnyError() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AnyError);
             return callInfo;
         }
 

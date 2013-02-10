@@ -23,9 +23,6 @@ using T4MVC;
 namespace valentines.Controllers {
     public partial class AccountController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AccountController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected AccountController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -47,33 +44,13 @@ namespace valentines.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Disassociate() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Disassociate);
+        public System.Web.Mvc.ActionResult Authenticate() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Authenticate);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Manage() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Manage);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ExternalLogin() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLogin);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ExternalLoginCallback() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLoginCallback);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ExternalLoginConfirmation() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLoginConfirmation);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ExternalLoginsList() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLoginsList);
+        public System.Web.Mvc.ActionResult OpenidRegisterFormSubmit() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.OpenidRegisterFormSubmit);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -89,16 +66,10 @@ namespace valentines.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Login = "Login";
+            public readonly string Authenticate = "Authenticate";
+            public readonly string OpenidRegisterFormSubmit = "OpenidRegisterFormSubmit";
             public readonly string LogOff = "LogOff";
-            public readonly string Register = "Register";
-            public readonly string Disassociate = "Disassociate";
-            public readonly string Manage = "Manage";
-            public readonly string ExternalLogin = "ExternalLogin";
-            public readonly string ExternalLoginCallback = "ExternalLoginCallback";
-            public readonly string ExternalLoginConfirmation = "ExternalLoginConfirmation";
-            public readonly string ExternalLoginFailure = "ExternalLoginFailure";
-            public readonly string ExternalLoginsList = "ExternalLoginsList";
-            public readonly string RemoveExternalLogins = "RemoveExternalLogins";
+            public readonly string LogOut = "LogOut";
         }
 
 
@@ -123,16 +94,23 @@ namespace valentines.Controllers {
     public class T4MVC_AccountController: valentines.Controllers.AccountController {
         public T4MVC_AccountController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Login(string returnUrl) {
+        public override System.Web.Mvc.ActionResult Login(System.Guid? OneTimeSignupCode, string ReturnUrl) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Login);
+            callInfo.RouteValueDictionary.Add("OneTimeSignupCode", OneTimeSignupCode);
+            callInfo.RouteValueDictionary.Add("ReturnUrl", ReturnUrl);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Authenticate(string returnUrl) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Authenticate);
             callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Login(valentines.Models.LoginModel model, string returnUrl) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Login);
+        public override System.Web.Mvc.ActionResult OpenidRegisterFormSubmit(valentines.ViewModels.OpenIdRegistrationViewModel model, bool captchaValid) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.OpenidRegisterFormSubmit);
             callInfo.RouteValueDictionary.Add("model", model);
-            callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
+            callInfo.RouteValueDictionary.Add("captchaValid", captchaValid);
             return callInfo;
         }
 
@@ -141,69 +119,8 @@ namespace valentines.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Register() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Register);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Register(valentines.Models.RegisterModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Register);
-            callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Disassociate(string provider, string providerUserId) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Disassociate);
-            callInfo.RouteValueDictionary.Add("provider", provider);
-            callInfo.RouteValueDictionary.Add("providerUserId", providerUserId);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Manage(valentines.Controllers.AccountController.ManageMessageId? message) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Manage);
-            callInfo.RouteValueDictionary.Add("message", message);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Manage(valentines.Models.LocalPasswordModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Manage);
-            callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult ExternalLogin(string provider, string returnUrl) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLogin);
-            callInfo.RouteValueDictionary.Add("provider", provider);
-            callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult ExternalLoginCallback(string returnUrl) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLoginCallback);
-            callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult ExternalLoginConfirmation(valentines.Models.RegisterExternalLoginModel model, string returnUrl) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLoginConfirmation);
-            callInfo.RouteValueDictionary.Add("model", model);
-            callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult ExternalLoginFailure() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLoginFailure);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult ExternalLoginsList(string returnUrl) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ExternalLoginsList);
-            callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult RemoveExternalLogins() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RemoveExternalLogins);
+        public override System.Web.Mvc.ActionResult LogOut() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.LogOut);
             return callInfo;
         }
 

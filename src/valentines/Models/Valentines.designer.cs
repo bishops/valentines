@@ -78,6 +78,18 @@ namespace valentines.Models
     partial void InsertMatch(Match instance);
     partial void UpdateMatch(Match instance);
     partial void DeleteMatch(Match instance);
+    partial void InsertOneTimeRegistrationCode(OneTimeRegistrationCode instance);
+    partial void UpdateOneTimeRegistrationCode(OneTimeRegistrationCode instance);
+    partial void DeleteOneTimeRegistrationCode(OneTimeRegistrationCode instance);
+    partial void InsertMiniProfilerResult(MiniProfilerResult instance);
+    partial void UpdateMiniProfilerResult(MiniProfilerResult instance);
+    partial void DeleteMiniProfilerResult(MiniProfilerResult instance);
+    partial void InsertOpenIDWhiteList1(OpenIDWhiteList1 instance);
+    partial void UpdateOpenIDWhiteList1(OpenIDWhiteList1 instance);
+    partial void DeleteOpenIDWhiteList1(OpenIDWhiteList1 instance);
+    partial void InsertUserOpenId(UserOpenId instance);
+    partial void UpdateUserOpenId(UserOpenId instance);
+    partial void DeleteUserOpenId(UserOpenId instance);
     #endregion
 		
 		public ValentinesDataContext() : 
@@ -235,6 +247,38 @@ namespace valentines.Models
 			get
 			{
 				return this.GetTable<Match>();
+			}
+		}
+		
+		public System.Data.Linq.Table<OneTimeRegistrationCode> OneTimeRegistrationCodes
+		{
+			get
+			{
+				return this.GetTable<OneTimeRegistrationCode>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MiniProfilerResult> MiniProfilerResults
+		{
+			get
+			{
+				return this.GetTable<MiniProfilerResult>();
+			}
+		}
+		
+		public System.Data.Linq.Table<OpenIDWhiteList1> OpenIDWhiteList1s
+		{
+			get
+			{
+				return this.GetTable<OpenIDWhiteList1>();
+			}
+		}
+		
+		public System.Data.Linq.Table<UserOpenId> UserOpenIds
+		{
+			get
+			{
+				return this.GetTable<UserOpenId>();
 			}
 		}
 	}
@@ -2703,6 +2747,8 @@ namespace valentines.Models
 		
 		private EntityRef<Match> _Match;
 		
+		private EntitySet<UserOpenId> _UserOpenIds;
+		
 		private EntityRef<aspnet_Application> _aspnet_Application;
 		
     #region Extensibility Method Definitions
@@ -2734,6 +2780,7 @@ namespace valentines.Models
 			this._Responses = new EntitySet<Response>(new Action<Response>(this.attach_Responses), new Action<Response>(this.detach_Responses));
 			this._Matches = new EntitySet<Match>(new Action<Match>(this.attach_Matches), new Action<Match>(this.detach_Matches));
 			this._Match = default(EntityRef<Match>);
+			this._UserOpenIds = new EntitySet<UserOpenId>(new Action<UserOpenId>(this.attach_UserOpenIds), new Action<UserOpenId>(this.detach_UserOpenIds));
 			this._aspnet_Application = default(EntityRef<aspnet_Application>);
 			OnCreated();
 		}
@@ -3021,6 +3068,19 @@ namespace valentines.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_UserOpenId", Storage="_UserOpenIds", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<UserOpenId> UserOpenIds
+		{
+			get
+			{
+				return this._UserOpenIds;
+			}
+			set
+			{
+				this._UserOpenIds.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_Application_aspnet_User", Storage="_aspnet_Application", ThisKey="ApplicationId", OtherKey="ApplicationId", IsForeignKey=true)]
 		public aspnet_Application aspnet_Application
 		{
@@ -3118,6 +3178,18 @@ namespace valentines.Models
 		}
 		
 		private void detach_Matches(Match entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = null;
+		}
+		
+		private void attach_UserOpenIds(UserOpenId entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = this;
+		}
+		
+		private void detach_UserOpenIds(UserOpenId entity)
 		{
 			this.SendPropertyChanging();
 			entity.aspnet_User = null;
@@ -4243,6 +4315,463 @@ namespace valentines.Models
 						this._RequestUser = default(System.Guid);
 					}
 					this.SendPropertyChanged("aspnet_User1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OneTimeRegistrationCodes")]
+	public partial class OneTimeRegistrationCode : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _Id;
+		
+		private string _CustomWelcomeName;
+		
+		private int _UsesRemaining;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
+    partial void OnCustomWelcomeNameChanging(string value);
+    partial void OnCustomWelcomeNameChanged();
+    partial void OnUsesRemainingChanging(int value);
+    partial void OnUsesRemainingChanged();
+    #endregion
+		
+		public OneTimeRegistrationCode()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomWelcomeName", DbType="NVarChar(400)")]
+		public string CustomWelcomeName
+		{
+			get
+			{
+				return this._CustomWelcomeName;
+			}
+			set
+			{
+				if ((this._CustomWelcomeName != value))
+				{
+					this.OnCustomWelcomeNameChanging(value);
+					this.SendPropertyChanging();
+					this._CustomWelcomeName = value;
+					this.SendPropertyChanged("CustomWelcomeName");
+					this.OnCustomWelcomeNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsesRemaining", DbType="Int NOT NULL")]
+		public int UsesRemaining
+		{
+			get
+			{
+				return this._UsesRemaining;
+			}
+			set
+			{
+				if ((this._UsesRemaining != value))
+				{
+					this.OnUsesRemainingChanging(value);
+					this.SendPropertyChanging();
+					this._UsesRemaining = value;
+					this.SendPropertyChanged("UsesRemaining");
+					this.OnUsesRemainingChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MiniProfilerResults")]
+	public partial class MiniProfilerResult : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _Id;
+		
+		private System.Data.Linq.Binary _Results;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
+    partial void OnResultsChanging(System.Data.Linq.Binary value);
+    partial void OnResultsChanged();
+    #endregion
+		
+		public MiniProfilerResult()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Results", DbType="VarBinary(MAX) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Results
+		{
+			get
+			{
+				return this._Results;
+			}
+			set
+			{
+				if ((this._Results != value))
+				{
+					this.OnResultsChanging(value);
+					this.SendPropertyChanging();
+					this._Results = value;
+					this.SendPropertyChanged("Results");
+					this.OnResultsChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OpenIDWhiteList")]
+	public partial class OpenIDWhiteList1 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _OpenID;
+		
+		private bool _IsEnabled;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnOpenIDChanging(string value);
+    partial void OnOpenIDChanged();
+    partial void OnIsEnabledChanging(bool value);
+    partial void OnIsEnabledChanged();
+    #endregion
+		
+		public OpenIDWhiteList1()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OpenID", DbType="NVarChar(450) NOT NULL", CanBeNull=false)]
+		public string OpenID
+		{
+			get
+			{
+				return this._OpenID;
+			}
+			set
+			{
+				if ((this._OpenID != value))
+				{
+					this.OnOpenIDChanging(value);
+					this.SendPropertyChanging();
+					this._OpenID = value;
+					this.SendPropertyChanged("OpenID");
+					this.OnOpenIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEnabled", DbType="Bit NOT NULL")]
+		public bool IsEnabled
+		{
+			get
+			{
+				return this._IsEnabled;
+			}
+			set
+			{
+				if ((this._IsEnabled != value))
+				{
+					this.OnIsEnabledChanging(value);
+					this.SendPropertyChanging();
+					this._IsEnabled = value;
+					this.SendPropertyChanged("IsEnabled");
+					this.OnIsEnabledChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserOpenIds")]
+	public partial class UserOpenId : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _OpenIdClaim;
+		
+		private System.Guid _UserId;
+		
+		private EntityRef<aspnet_User> _aspnet_User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnOpenIdClaimChanging(string value);
+    partial void OnOpenIdClaimChanged();
+    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanged();
+    #endregion
+		
+		public UserOpenId()
+		{
+			this._aspnet_User = default(EntityRef<aspnet_User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OpenIdClaim", DbType="NVarChar(450) NOT NULL", CanBeNull=false)]
+		public string OpenIdClaim
+		{
+			get
+			{
+				return this._OpenIdClaim;
+			}
+			set
+			{
+				if ((this._OpenIdClaim != value))
+				{
+					this.OnOpenIdClaimChanging(value);
+					this.SendPropertyChanging();
+					this._OpenIdClaim = value;
+					this.SendPropertyChanged("OpenIdClaim");
+					this.OnOpenIdClaimChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._aspnet_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_UserOpenId", Storage="_aspnet_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public aspnet_User aspnet_User
+		{
+			get
+			{
+				return this._aspnet_User.Entity;
+			}
+			set
+			{
+				aspnet_User previousValue = this._aspnet_User.Entity;
+				if (((previousValue != value) 
+							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._aspnet_User.Entity = null;
+						previousValue.UserOpenIds.Remove(this);
+					}
+					this._aspnet_User.Entity = value;
+					if ((value != null))
+					{
+						value.UserOpenIds.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(System.Guid);
+					}
+					this.SendPropertyChanged("aspnet_User");
 				}
 			}
 		}
