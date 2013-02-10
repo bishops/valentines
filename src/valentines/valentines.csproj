@@ -189,6 +189,7 @@
     <Compile Include="Helpers\BishopsOpenID.cs" />
     <Compile Include="Helpers\CustomCacheAttribute.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\GlobalGzip.cs" />
     <Compile Include="Helpers\HtmlUtilities.cs" />
     <Compile Include="Helpers\Inflector.cs" />
     <Compile Include="Helpers\InitializeSimpleMembershipAttribute.cs" />
@@ -222,6 +223,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\SubmitViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="404.html" />
@@ -382,7 +384,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="static\css\" />
     <Folder Include="static\js\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
