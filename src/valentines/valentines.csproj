@@ -336,7 +336,9 @@
     <Content Include="static\openid\vidoop.ico" />
     <Content Include="static\openid\wordpress.ico" />
     <Content Include="static\openid\yahoo.gif" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
