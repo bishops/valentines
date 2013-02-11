@@ -102,10 +102,9 @@ namespace valentines.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult OpenidRegisterFormSubmit(valentines.ViewModels.OpenIdRegistrationViewModel model, bool captchaValid) {
+        public override System.Web.Mvc.ActionResult OpenidRegisterFormSubmit(valentines.ViewModels.OpenIdRegistrationViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.OpenidRegisterFormSubmit);
             callInfo.RouteValueDictionary.Add("model", model);
-            callInfo.RouteValueDictionary.Add("captchaValid", captchaValid);
             return callInfo;
         }
 

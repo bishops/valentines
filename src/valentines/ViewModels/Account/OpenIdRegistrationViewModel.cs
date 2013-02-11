@@ -68,6 +68,10 @@ namespace valentines.ViewModels
             {
                 Sexes = new SelectList(MagicStrings.SexList, "Id", "Name");
             }
+            if (Grade == null || Grade == 0)
+            {
+                Grade = 9;
+            }
         }
 
         [Required(ErrorMessage="An OpenID claim must be included.")]

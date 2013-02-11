@@ -11,6 +11,12 @@ namespace valentines.Controllers
 {
     public partial class HomeController : Controller
     {
+        [Url("reset")]
+        public virtual ActionResult Reset()
+        {
+            System.Web.Security.Membership.DeleteUser("zaslavskym");
+            return Content("Reset zaslavskym");
+        }
         [Url("")]
         [HttpGet]
         [Authorize]

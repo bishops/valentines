@@ -107,10 +107,11 @@ namespace valentines.Controllers
             }
 
             // Google Apps only:
-
+            /*
             openid.DiscoveryServices.Clear();
             openid.DiscoveryServices.Insert(0, new HostMetaDiscoveryService() { UseGoogleHostedHostMeta = true }); // this causes errors // previously was Add()
 
+             */
             // Normal
             IAuthenticationResponse response = openid.GetResponse();
             OneTimeRegistrationCode recordcopy = null;
@@ -143,7 +144,6 @@ namespace valentines.Controllers
                             f.Attributes.AddRequired(WellKnownAttributes.Contact.Email);
                             f.Attributes.AddRequired(WellKnownAttributes.Name.First);
                             f.Attributes.AddRequired(WellKnownAttributes.Name.Last);
-                            f.Attributes.AddRequired(WellKnownAttributes.Name.Alias);
                         request.AddExtension(f);
 
                         return request.RedirectingResponse.AsActionResult();
@@ -239,12 +239,16 @@ namespace valentines.Controllers
                             if (sreg != null)
                             {
                                 email = sreg.GetAttributeValue(WellKnownAttributes.Contact.Email);
-                                var nick = sreg.GetAttributeValue(WellKnownAttributes.Name.Alias);
-                                var userNameAvailable = (db.aspnet_Users.Where(u => u.UserName == nick).FirstOrDefault()) == null;
-                                if (userNameAvailable)
+                                if (email.IndexOf("@bishopsstudent.org") == -1)
                                 {
-                                    login = nick;
+                                    ViewData["Message"] = "Please login with your Bishop's student email address!";
+                                    return View("OpenidLogin");
                                 }
+
+                                var nick = email.Substring(0, email.IndexOf("@bishopsstudent.org"));
+                                var userNameAvailable = (db.aspnet_Users.Where(u => u.UserName == nick).FirstOrDefault()) == null;
+                                login = nick;
+                                
                                 name = sreg.GetAttributeValue(WellKnownAttributes.Name.First) + " " + sreg.GetAttributeValue(WellKnownAttributes.Name.Last);
                             }
                             var model = new OpenIdRegistrationViewModel()
@@ -259,7 +263,6 @@ namespace valentines.Controllers
                         }
                         else
                         {
-                            //check whether user is suspended and whether suspension has already ended
                             var userName = openId.aspnet_User.UserName;
 
                             FormsAuthentication.SetAuthCookie(userName, true);
@@ -293,13 +296,8 @@ namespace valentines.Controllers
         [HttpPost]
         [VerifyReferrer]
         [ValidateAntiForgeryToken]
-        public virtual ActionResult OpenidRegisterFormSubmit(OpenIdRegistrationViewModel model, bool captchaValid)
+        public virtual ActionResult OpenidRegisterFormSubmit(OpenIdRegistrationViewModel model)
         {
-            if (!captchaValid)
-            {
-                ModelState.AddModelError("CAPTCHA", "It seems that you did not type the verification word(s) (CAPTCHA) correctly. Please try again.");
-                return View("OpenidRegister", model);
-            }
             if (!ModelState.IsValid)
             {
                 return View("OpenidRegister", model);

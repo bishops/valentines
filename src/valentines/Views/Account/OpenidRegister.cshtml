@@ -1,4 +1,5 @@
-﻿@model valentines.ViewModels.OpenIdRegistrationViewModel
+﻿@using System.Web.Mvc.Html5;
+@model valentines.ViewModels.OpenIdRegistrationViewModel
 @{
 	ViewBag.Title = "Register";
 	/*
@@ -27,7 +28,7 @@
 						<div class="control-group">
 							@Html.LabelFor(m => m.Grade, new { @class = "control-label" })
 							<div class="controls">
-							@Html.TextBoxFor(m => m.Grade, new { @class = "input-xlarge" })
+							@Html.Html5TextBoxFor(m => m.Grade, InputTypes.InputType.Number, new { @class = "input-large", min = 9, max=12 })
 							@Html.ValidationMessageFor(m => m.Grade)
 						</div></div>
 						<div class="control-group">
