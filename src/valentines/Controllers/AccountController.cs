@@ -20,6 +20,7 @@ using DotNetOpenAuth.OpenId.RelyingParty;
 using System.Net;
 using System.Configuration;
 using System.Web.Routing;
+using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 
 
 namespace valentines.Controllers
@@ -104,6 +105,13 @@ namespace valentines.Controllers
             {
                 Session["OneTimeSignupCode"] = Request.Form["OneTimeSignupCode"];
             }
+
+            // Google Apps only:
+
+            openid.DiscoveryServices.Clear();
+            openid.DiscoveryServices.Insert(0, new HostMetaDiscoveryService() { UseGoogleHostedHostMeta = true }); // this causes errors // previously was Add()
+
+            // Normal
             IAuthenticationResponse response = openid.GetResponse();
             OneTimeRegistrationCode recordcopy = null;
             if (response == null)
@@ -130,13 +138,13 @@ namespace valentines.Controllers
                     {
                         IAuthenticationRequest request = openid.CreateRequest(Request.Form["openid_identifier"]);
 
-                        request.AddExtension(new ClaimsRequest
-                        {
-                            Email = DemandLevel.Require,
-                            Nickname = DemandLevel.Request,
-                            FullName = DemandLevel.Require,
-                            BirthDate = DemandLevel.Request
-                        });
+                        var f = new FetchRequest();
+                        
+                            f.Attributes.AddRequired(WellKnownAttributes.Contact.Email);
+                            f.Attributes.AddRequired(WellKnownAttributes.Name.First);
+                            f.Attributes.AddRequired(WellKnownAttributes.Name.Last);
+                            f.Attributes.AddRequired(WellKnownAttributes.Name.Alias);
+                        request.AddExtension(f);
 
                         return request.RedirectingResponse.AsActionResult();
                     }
@@ -166,7 +174,7 @@ namespace valentines.Controllers
                 switch (response.Status)
                 {
                     case AuthenticationStatus.Authenticated:
-                        var sreg = response.GetExtension<ClaimsResponse>();
+                        var sreg = response.GetExtension<FetchResponse>();
 
                         UserOpenId openId = null;
                         openId = db.UserOpenIds.Where(o => o.OpenIdClaim == response.ClaimedIdentifier.ToString()).FirstOrDefault();
@@ -230,13 +238,14 @@ namespace valentines.Controllers
                             string name = "";
                             if (sreg != null)
                             {
-                                email = sreg.Email;
-                                var userNameAvailable = (db.aspnet_Users.Where(u => u.UserName == sreg.Nickname).FirstOrDefault()) == null;
+                                email = sreg.GetAttributeValue(WellKnownAttributes.Contact.Email);
+                                var nick = sreg.GetAttributeValue(WellKnownAttributes.Name.Alias);
+                                var userNameAvailable = (db.aspnet_Users.Where(u => u.UserName == nick).FirstOrDefault()) == null;
                                 if (userNameAvailable)
                                 {
-                                    login = sreg.Nickname;
+                                    login = nick;
                                 }
-                                name = sreg.FullName;
+                                name = sreg.GetAttributeValue(WellKnownAttributes.Name.First) + " " + sreg.GetAttributeValue(WellKnownAttributes.Name.Last);
                             }
                             var model = new OpenIdRegistrationViewModel()
                             {

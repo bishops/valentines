@@ -27,6 +27,7 @@
 		<p>To log in or register, select your <a href="http://openid.net/what/">OpenID account provider</a> below.</p>
 	</div>
 	<div class="form-error">
+    <p>@ViewData["Message"]</p>
 	</div>
 	<form id="openid_form" action="@Url.Action("Authenticate","Account")" method="post">       
 			@if((ViewData["OneTimeSignupCode"] as string).HasValue()) { @Html.Hidden("OneTimeSignupCode",ViewData["OneTimeSignupCode"] as string) }
@@ -37,6 +38,15 @@
 			
 			<div id="openid_input_area"> 
 			</div>  
+
+            <table id="openid-url-input" style="display: none;"> 
+				<tr>            
+					<td class="vt large"><input id="openid_identifier" name="openid_identifier" class="openid-identifier" style="height:28px; width:500px;" tabindex="100"></td> 
+					<td class="vt large"><input id="submit-button" class="btn btn-primary btn-large" type="submit" value="Log in" tabindex="101"></td> 
+				</tr>                                
+				
+ 
+			</table> 
 			
 		   
 			

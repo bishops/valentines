@@ -11,13 +11,13 @@ var providers_large = {
 		file: 'bishops.gif',
 		name: "The Bishop's School Student Email",
 		url: 'https://google.com/accounts/o8/site-xrds?hd=bishopsstudent.org',
-	}
-	/*google: {
+	},
+	google: {
 		id: 'google',
 		file: 'google.gif',
 		name: 'Google',
 		url: 'https://www.google.com/accounts/o8/id',
-	},
+	}/*,
 	yahoo: {
 		id: 'yahoo',
 		name: 'Yahoo',
