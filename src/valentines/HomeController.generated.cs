@@ -54,8 +54,8 @@ namespace valentines.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
-            public readonly string About = "About";
-            public readonly string Contact = "Contact";
+            public readonly string AlreadySubmitted = "AlreadySubmitted";
+            public readonly string Results = "Results";
             public readonly string ComputeMatches = "ComputeMatches";
         }
 
@@ -65,9 +65,8 @@ namespace valentines.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string About = "~/Views/Home/About.cshtml";
-            public readonly string Contact = "~/Views/Home/Contact.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
+            public readonly string MissedTheDeadline = "~/Views/Home/MissedTheDeadline.cshtml";
             public readonly string Results = "~/Views/Home/Results.cshtml";
             public readonly string ResultsComingSoon = "~/Views/Home/ResultsComingSoon.cshtml";
         }
@@ -82,13 +81,19 @@ namespace valentines.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult About() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.About);
+        public override System.Web.Mvc.ActionResult Index(valentines.ViewModels.SubmitViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Contact() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Contact);
+        public override System.Web.Mvc.ActionResult AlreadySubmitted() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AlreadySubmitted);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Results() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Results);
             return callInfo;
         }
 

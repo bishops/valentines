@@ -78,15 +78,10 @@ namespace valentines.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string _ChangePasswordPartial = "~/Views/Account/_ChangePasswordPartial.cshtml";
-            public readonly string _ExternalLoginsListPartial = "~/Views/Account/_ExternalLoginsListPartial.cshtml";
-            public readonly string _RemoveExternalLoginsPartial = "~/Views/Account/_RemoveExternalLoginsPartial.cshtml";
-            public readonly string _SetPasswordPartial = "~/Views/Account/_SetPasswordPartial.cshtml";
-            public readonly string ExternalLoginConfirmation = "~/Views/Account/ExternalLoginConfirmation.cshtml";
-            public readonly string ExternalLoginFailure = "~/Views/Account/ExternalLoginFailure.cshtml";
-            public readonly string Login = "~/Views/Account/Login.cshtml";
-            public readonly string Manage = "~/Views/Account/Manage.cshtml";
-            public readonly string Register = "~/Views/Account/Register.cshtml";
+            public readonly string LogOff = "~/Views/Account/LogOff.cshtml";
+            public readonly string OpenidLogin = "~/Views/Account/OpenidLogin.cshtml";
+            public readonly string OpenidRegister = "~/Views/Account/OpenidRegister.cshtml";
+            public readonly string WhiteListBlock = "~/Views/Account/WhiteListBlock.cshtml";
         }
     }
 

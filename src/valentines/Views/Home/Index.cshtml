@@ -1,45 +1,65 @@
-﻿@{
-    ViewBag.Title = "Questionnaire";
+﻿@model valentines.ViewModels.SubmitViewModel
+@{
+	ViewBag.Title = "Questionnaire";
 }
 @section BetweenHeaderAndContent {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
-        </div>
-    </section>
+	<div class="hero-unit hero-section" id="heroheader">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<h1 class="ac">The Bishop's School Valentine's Day Survey</h1>
+				<h2 class="ac">Fill out the form below to get your matches!</h2>
+			</div>
+		</div>
+	</div>
+</div>
 }
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+<div class="row">
+	<div class="span9">
+        @if (ViewBag.alreadySubmitted)
+        {
+            <p>Thank you for submitting the survey! Results will be available soon.</p>
+        }
+        else
+        { 
+            <p>The form closes on @ViewBag.formCloses.ToShortDateString() - please submit by then!</p>
+        }
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+		@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+  {
+			@Html.ValidationSummary("Whoops! Please correct the errors and try again.")
+
+            @foreach(var q in Model.Questions)
+            { 
+			    <div class="control-group">
+				    <label class="control-label" for="q-@q.qID">Question @q.qID</label>
+				    <div class="controls">
+                        <p>@q.Text</p>
+                        @foreach (var a in q.Answers)
+                        { 
+                            <label class="radio">
+                                @if(ViewBag.alreadySubmitted)
+                                {
+                                    @Html.RadioButtonFor(m=>Model.Questions.Where(u=>u.qID==q.qID).Single().SelectedAnswer,a.Id, new { disabled = "disabled" }) 
+                                }
+                                else
+                                {
+                                    @Html.RadioButtonFor(m=>Model.Questions.Where(u=>u.qID==q.qID).Single().SelectedAnswer,a.Id) 
+                                }
+                                @a.Text
+                            </label>
+                        }
+				    </div>
+			    </div>
+            }
+  
+            @if (!ViewBag.alreadySubmitted)
+            {
+			    <div class="form-actions">
+				    <button type="submit" class="btn btn-large btn-primary">Submit form (no undo)</button>
+			    </div>
+            }
+    }
+	</div>
+</div>
