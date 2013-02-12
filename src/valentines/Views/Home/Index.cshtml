@@ -3,13 +3,13 @@
 	ViewBag.Title = "Questionnaire";
 }
 @section BetweenHeaderAndContent {
-	<div class="hero-unit hero-section" id="heroheader">
+	<div class="hero-unit hero-section hero-index" id="heroheader">
 	<div class="container">
 		<div class="row">
 			<div class="span12">
 				<h1 class="ac" style="color:#CA278C;"><i class="icon-heart icon-large"></i> Valentine's Day Survey <i class="icon-heart icon-large"></i></h1>
 				<h3 class="ac">Fill out the form below to get your matches!</h3>
-                <p class="muted ac" style="font-style:italic">Form closes on @ViewBag.formCloses.ToShortDateString()</p>
+                <p class="muted ac" style="font-style:italic">Form closes on @ViewBag.formCloses.ToLongDateString() at @ViewBag.formCloses.ToShortTimeString()</p>
 			</div>
 		</div>
 	</div>

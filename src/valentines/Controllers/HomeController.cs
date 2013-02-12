@@ -28,6 +28,10 @@ namespace valentines.Controllers
             var responses = db.Responses.Where(r => r.UserId == Current.UserID.Value);
             if (responses.Any()) // responses already exist for this user
             {
+                if (System.Configuration.ConfigurationManager.AppSettings["ResultsOpen"] == "true")
+                {
+                    return RedirectToAction("Results"); // show results page
+                }
                 return RedirectToAction("AlreadySubmitted"); // show thank you screen
             }
 
@@ -99,6 +103,7 @@ namespace valentines.Controllers
         [Url("results")]
         public virtual ActionResult Results()
         {
+            ViewBag.curPage = "Results";
             return View();
         }
 
