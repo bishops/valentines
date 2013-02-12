@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RiaLibrary.Web;
 using valentines.Models;
 using valentines.ViewModels;
+using valentines.Helpers;
 
 namespace valentines.Controllers
 {
@@ -41,14 +42,14 @@ namespace valentines.Controllers
                 // The form deadline has passed and they have not submitted anything :(
                 return View("MissedTheDeadline");
             }
-            ViewBag.formCloses = deadline;
             
             var model = new SubmitViewModel();
-            foreach (var q in db.Questions)
+            model.FormCloses = deadline;
+            foreach (var q in db.Questions.OrderBy(q=>q.Id))
             {
-                model.Questions.Add(new QuestionDisplay() { qID = q.Id, Text = q.Text, Answers = q.Answers.ToList()});
+                model.Questions.Add(new QuestionDisplay() { qID = q.Id, Text = q.Text, Answers = q.Answers.OrderBy(a=>a.AnswerOrder).ToList()});
             }
-            ViewBag.alreadySubmitted = false;
+            model.AlreadySubmitted = false;
             return View(model);
         }
 
@@ -56,6 +57,8 @@ namespace valentines.Controllers
         [HttpPost]
         [Authorize]
         [ValidateInput(true)]
+        [VerifyReferrer]
+        [ValidateAntiForgeryToken]
         public virtual ActionResult Index(SubmitViewModel model)
         {
             ViewBag.curPage = "Home";
@@ -77,6 +80,7 @@ namespace valentines.Controllers
                 r.UserId = Current.UserID.Value;
                 r.QuestionId = q.qID;
                 r.AnswerId = q.SelectedAnswer;
+                r.Date = DateTime.UtcNow;
                 db.Responses.InsertOnSubmit(r);
             }
             db.SubmitChanges();
@@ -96,7 +100,8 @@ namespace valentines.Controllers
             {
                 model.Questions.Add(new QuestionDisplay() { qID = q.Id, Text = q.Text, Answers = q.Answers.ToList(), SelectedAnswer = db.Responses.Single(r=>r.UserId == Current.UserID.Value && r.QuestionId==q.Id).AnswerId });
             }
-            ViewBag.alreadySubmitted = true;
+            model.AlreadySubmitted = true;
+            model.FormCloses = DateTime.Parse(System.Configuration.ConfigurationManager.AppSettings["FormDeadline"]);
             return View("Index", model);
         }
 

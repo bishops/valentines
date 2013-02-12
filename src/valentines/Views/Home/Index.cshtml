@@ -9,7 +9,7 @@
 			<div class="span12">
 				<h1 class="ac" style="color:#CA278C;"><i class="icon-heart icon-large"></i> Valentine's Day Survey <i class="icon-heart icon-large"></i></h1>
 				<h3 class="ac">Fill out the form below to get your matches!</h3>
-                <p class="muted ac" style="font-style:italic">Form closes on @ViewBag.formCloses.ToLongDateString() at @ViewBag.formCloses.ToShortTimeString()</p>
+                <p class="muted ac" style="font-style:italic">Form closes on @Model.FormCloses.ToLongDateString() at @Model.FormCloses.ToShortTimeString()</p>
 			</div>
 		</div>
 	</div>
@@ -18,36 +18,55 @@
 
 
 <div class="row">
+@if (Model.AlreadySubmitted)
+        { 
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Thank you for submitting the survey!</strong> Results will be available on Thursday morning.
+        </div>
+        }
 	<div class="span9">
-
+        
 		@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
   {
 			@Html.ValidationSummary("Whoops! Please correct the errors and try again.");
+            <!-- ensures that information required to render view is passed with model (necessary if model doesn't pass validation and we return to view) -->
+            @Html.HiddenFor(m=>m.AlreadySubmitted)
+            @Html.HiddenFor(m=>m.FormCloses)
 
-            foreach(var q in Model.Questions.OrderBy(q=>q.qID)) { 
+            for(var qI = 0; qI<Model.Questions.Count; qI++) { // We use for instead of foreach because this way of creating radiobuttons requires question IDs to be in the name attribute. If we do a foreach(var q in questions), then name will be q.SelectedAnswer, so all the questions overwrite one another.
+                var q = Model.Questions[qI];
 			    <div class="control-group">
-				    <label class="control-label" for="q-@q.qID">Question @q.qID</label>
+				    <label class="control-label" for="q-@Model.Questions[qI].qID">Question @Model.Questions[qI].qID</label>
 				    <div class="controls">
-                        <p style="padding-top: 5px;"><b>@q.Text</b></p>
-                        @foreach (var a in q.Answers.OrderBy(a=>a.AnswerOrder))
+                        <p style="padding-top: 5px;"><b>@Model.Questions[qI].Text</b></p>
+                        @Html.HiddenFor(m=>m.Questions[qI].qID) <!-- necessary for all questions to carry through in model, even those for which user neglects to select an answer. -->
+                        @Html.HiddenFor(m=>m.Questions[qI].Text) <!-- ensures that text stays put after an invalid submission and return to this view without regenerating the original model -->
+                        @for (var qA = 0; qA < Model.Questions[qI].Answers.Count; qA++ )
                         { 
                             <label class="radio">
-                                @if(ViewBag.alreadySubmitted)
+                                @Html.HiddenFor(m=>m.Questions[qI].Answers[qA].Id)
+                                @Html.HiddenFor(m=>m.Questions[qI].Answers[qA].Text)
+                                @Html.HiddenFor(m=>m.Questions[qI].Answers[qA].AnswerOrder)
+                                
+                                @if (Model.AlreadySubmitted)
                                 {
-                                    @Html.RadioButtonFor(m=>Model.Questions.Where(u=>u.qID==q.qID).Single().SelectedAnswer,a.Id, new { disabled = "disabled" }) 
+                                    @Html.RadioButtonFor(m => m.Questions[qI].SelectedAnswer, Model.Questions[qI].Answers[qA].Id, new { disabled = "disabled" }) 
                                 }
                                 else
                                 {
-                                    @Html.RadioButtonFor(m=>Model.Questions.Where(u=>u.qID==q.qID).Single().SelectedAnswer,a.Id) 
+                                    @Html.RadioButtonFor(m => m.Questions[qI].SelectedAnswer, Model.Questions[qI].Answers[qA].Id) 
                                 }
-                                @a.Text
+                                @Model.Questions[qI].Answers[qA].Text
                             </label>
                         }
 				    </div>
 			    </div>
             }
+            
+            @Html.AntiForgeryToken()
   
-            if (!ViewBag.alreadySubmitted) {
+            if (!Model.AlreadySubmitted) {
 			    <div class="form-actions">
 				    <button type="submit" class="btn btn-large btn-info">Submit</button>
                     <span class="help-inline">There is no undo!</span>
@@ -56,13 +75,9 @@
     }
 	</div>
     <div class="span3">
-            @if (ViewBag.alreadySubmitted)
-        {
-            <h4 class="ac">Thank you for submitting the survey!</h4><p>Results will be available soon.</p>
-        }
-        else
+        @if (!Model.AlreadySubmitted)
         { 
-            <h4 class="ac">Please submit by @ViewBag.formCloses.ToShortDateString()!</h4>
+            <h4 class="ac">Please submit by @Model.FormCloses.ToShortDateString()!</h4>
         }
     </div>
 </div>
