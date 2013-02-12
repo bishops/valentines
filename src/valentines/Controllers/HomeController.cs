@@ -95,6 +95,17 @@ namespace valentines.Controllers
             ViewBag.curPage = "Home";
             var db = Current.DB;
 
+            var responses = db.Responses.Where(r => r.UserId == Current.UserID.Value);
+            if (!responses.Any()) // no responses exist for this user, i.e. they haven't submitted the form yet, so we're in the wrong place
+            {
+                return RedirectToAction("Index");
+            }
+
+            if (System.Configuration.ConfigurationManager.AppSettings["ResultsOpen"] == "true")
+            {
+                return RedirectToAction("Results"); // show results page
+            }
+
             var model = new SubmitViewModel();
             foreach (var q in db.Questions)
             {
