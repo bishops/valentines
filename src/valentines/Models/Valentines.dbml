@@ -130,9 +130,9 @@
       <Association Name="aspnet_User_aspnet_Profile" Member="aspnet_Profile" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Profile" Cardinality="One" />
       <Association Name="aspnet_User_aspnet_UsersInRole" Member="aspnet_UsersInRoles" ThisKey="UserId" OtherKey="UserId" Type="aspnet_UsersInRole" />
       <Association Name="aspnet_User_Response" Member="Responses" ThisKey="UserId" OtherKey="UserId" Type="Response" />
-      <Association Name="aspnet_User_Match" Member="Matches" ThisKey="UserId" OtherKey="MatchedUser" Type="Match" />
-      <Association Name="aspnet_User_Match1" Member="Match" ThisKey="UserId" OtherKey="RequestUser" Type="Match" Cardinality="One" />
       <Association Name="aspnet_User_UserOpenId" Member="UserOpenIds" ThisKey="UserId" OtherKey="UserId" Type="UserOpenId" />
+      <Association Name="aspnet_User_Match" Member="Matches" ThisKey="UserId" OtherKey="MatchedUser" Type="Match" />
+      <Association Name="aspnet_User_Match1" Member="Matches1" ThisKey="UserId" OtherKey="RequestUser" Type="Match" />
       <Association Name="aspnet_Application_aspnet_User" Member="aspnet_Application" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Application" IsForeignKey="true" />
     </Type>
   </Table>
@@ -161,17 +161,6 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="OpenID" Type="System.String" DbType="NVarChar(450) NOT NULL" CanBeNull="false" />
       <Column Name="IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Matches" Member="Matches">
-    <Type Name="Match">
-      <Column Name="RequestUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="MatchedUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="CompatibilityIndex" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="DateCalculated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="AreSameGrade" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="aspnet_User_Match" Member="aspnet_User" ThisKey="MatchedUser" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
-      <Association Name="aspnet_User_Match1" Member="aspnet_User1" ThisKey="RequestUser" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.OneTimeRegistrationCodes" Member="OneTimeRegistrationCodes">
@@ -218,6 +207,19 @@
       <Column Name="Text" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="Question_Response" Member="Responses" ThisKey="Id" OtherKey="QuestionId" Type="Response" />
       <Association Name="Question_Answer" Member="Answers" ThisKey="Id" OtherKey="QuestionId" Type="Answer" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Matches" Member="Matches">
+    <Type Name="Match">
+      <Column Name="RequestUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="MatchedUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="CompatibilityIndex" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="DateCalculated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="AreSameGrade" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MatchedSex" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MatchId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="aspnet_User_Match" Member="aspnet_User" ThisKey="MatchedUser" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="aspnet_User_Match1" Member="aspnet_User1" ThisKey="RequestUser" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

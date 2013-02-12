@@ -233,6 +233,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Account\OpenIdRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\ResultsViewModel.cs" />
     <Compile Include="ViewModels\SubmitViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

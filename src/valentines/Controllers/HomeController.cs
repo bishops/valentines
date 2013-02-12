@@ -7,6 +7,7 @@ using RiaLibrary.Web;
 using valentines.Models;
 using valentines.ViewModels;
 using valentines.Helpers;
+using System.Threading;
 
 namespace valentines.Controllers
 {
@@ -117,18 +118,76 @@ namespace valentines.Controllers
         }
 
         [Url("results")]
+        [Authorize]
         public virtual ActionResult Results()
         {
             ViewBag.curPage = "Results";
-            return View();
+
+            if (System.Configuration.ConfigurationManager.AppSettings["ResultsOpen"] != "true")
+            {
+                return View("ResultsComingSoon");
+            }
+
+            var db = Current.DB;
+            var matches = db.Matches.Where(m => m.RequestUser == Current.UserID.Value);
+            if (!matches.Any()) // no rows returned
+            {
+                // Must not have submitted the form :(
+                return RedirectToAction("Index"); // this will show explanation that did not submit form on time
+            }
+
+            // matchedsex=false is male, matchedsex=true is female
+            var allSchoolMales = db.Matches.Where(m => m.MatchedSex == false).OrderByDescending(m=>m.CompatibilityIndex).Take(5).ToList();
+            foreach (var i in allSchoolMales)
+            {
+                i.FillProperties();
+            }
+            var allSchoolFemales = db.Matches.Where(m => m.MatchedSex == true).OrderByDescending(m => m.CompatibilityIndex).Take(5).ToList();
+            foreach (var i in allSchoolFemales)
+            {
+                i.FillProperties();
+            }
+            var yourGradeMales = db.Matches.Where(m => m.MatchedSex == false && m.AreSameGrade == true).OrderByDescending(m => m.CompatibilityIndex).Take(5).ToList();
+            foreach (var i in yourGradeMales)
+            {
+                i.FillProperties();
+            }
+            var yourGradeFemales = db.Matches.Where(m => m.MatchedSex == true && m.AreSameGrade == true).OrderByDescending(m => m.CompatibilityIndex).Take(5).ToList();
+            foreach (var i in yourGradeFemales)
+            {
+                i.FillProperties();
+            }
+            var nemesis = db.Matches.OrderByDescending(m => m.CompatibilityIndex).Last();
+
+            var model = new ResultsViewModel()
+            {
+                AllSchoolFemales = allSchoolFemales,
+                AllSchoolMales = allSchoolMales,
+                YourGradeFemales = yourGradeFemales,
+                YourGradeMales = yourGradeMales,
+                Nemesis = nemesis
+            };
+
+            return View(model);
         }
 
         [Url("matches/make")]
         public virtual ActionResult ComputeMatches()
         {
-            Matcher m = new Matcher(Current.DB);
-            m.computeMatches();
-            return Content("Done.");
+            // launch async task
+            try
+            {
+                ThreadPool.QueueUserWorkItem((obj) =>
+                {
+                    Matcher m = new Matcher(Current.DB);
+                    m.computeMatches();
+                });
+                return Content("Started.");
+            }
+            catch (Exception ex)
+            {
+                return Content("Error "+ex.Message);
+            }
         }
     }
 }

@@ -32,6 +32,7 @@ namespace valentines.Controllers
     public partial class AccountController : CustomControllerBase
     {
         private static readonly OpenIdRelyingParty openid = new OpenIdRelyingParty();
+        static bool LimitToBishopsOpenIds = false;
 
         protected override void Initialize(RequestContext requestContext)
         {
@@ -144,6 +145,7 @@ namespace valentines.Controllers
                             f.Attributes.AddRequired(WellKnownAttributes.Contact.Email);
                             f.Attributes.AddRequired(WellKnownAttributes.Name.First);
                             f.Attributes.AddRequired(WellKnownAttributes.Name.Last);
+                            f.Attributes.AddOptional(WellKnownAttributes.Name.Alias);
                         request.AddExtension(f);
 
                         return request.RedirectingResponse.AsActionResult();
@@ -239,13 +241,29 @@ namespace valentines.Controllers
                             if (sreg != null)
                             {
                                 email = sreg.GetAttributeValue(WellKnownAttributes.Contact.Email);
+                                var nick = "";
                                 if (email.IndexOf("@bishopsstudent.org") == -1)
                                 {
-                                    ViewData["Message"] = "Please login with your Bishop's student email address!";
-                                    return View("OpenidLogin");
+                                    if (LimitToBishopsOpenIds)
+                                    {
+                                        ViewData["Message"] = "Please login with your Bishop's student email address!";
+                                        return View("OpenidLogin");
+                                    }
+                                    var potentialNick = sreg.GetAttributeValue(WellKnownAttributes.Name.Alias);
+                                    if (potentialNick.HasValue())
+                                    {
+                                        nick = potentialNick;
+                                    }
+                                    else
+                                    {
+                                        // make something random
+                                        nick = new Random().Next(500,500000).ToString();
+                                    }
                                 }
-
-                                var nick = email.Substring(0, email.IndexOf("@bishopsstudent.org"));
+                                else
+                                {
+                                    nick = email.Substring(0, email.IndexOf("@bishopsstudent.org"));
+                                }
                                 var userNameAvailable = (db.aspnet_Users.Where(u => u.UserName == nick).FirstOrDefault()) == null;
                                 login = nick;
                                 

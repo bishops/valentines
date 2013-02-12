@@ -1,5 +1,156 @@
-﻿@{
-    ViewBag.Title = "Results";
+﻿@model valentines.ViewModels.ResultsViewModel
+@{
+	ViewBag.Title = "Results";
+}
+@section BetweenHeaderAndContent {
+	<div class="hero-unit hero-section hero-index" id="heroheader">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<h1 class="ac" style="color:#CA278C;"><i class="icon-heart icon-large"></i> Your Matches <i class="icon-heart icon-large"></i></h1>
+			</div>
+		</div>
+	</div>
+</div>
 }
 
-<h2>Results</h2>
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#male" data-toggle="tab">Male</a>
+      </li>
+      <li><a href="#female" data-toggle="tab">Female</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active" id="male">
+
+            <!-- Start male all school -->
+
+            <div class="page-header">
+                <h1>All School</h1>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>How You Rank For Them</th>
+                        <th>Compatibility Index</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.AllSchoolMales.Count(); i++ )
+                    { 
+                        var m = Model.AllSchoolMales[i];
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td>@m.FullName</td>
+                            <td>@m.Grade</td>
+                            <td>@m.PositionOnTheirListAllSchool</td>
+                            <td>@m.CompatibilityIndex</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Start male grade-only -->
+
+            <div class="page-header">
+                <h1>Your Grade</h1>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>How You Rank For Them</th>
+                        <th>Compatibility Index</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.YourGradeMales.Count(); i++ )
+                    { 
+                        var m = Model.YourGradeMales[i];
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td>@m.FullName</td>
+                            <td>@m.Grade</td>
+                            <td>@m.PositionOnTheirListYourGrade</td>
+                            <td>@m.CompatibilityIndex</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    
+        </div>
+        <div class="tab-pane fade" id="female">
+        <!-- Start female all school -->
+
+            <div class="page-header">
+                <h1>All School</h1>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>How You Rank For Them</th>
+                        <th>Compatibility Index</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.AllSchoolFemales.Count(); i++ )
+                    {
+                        var m = Model.AllSchoolFemales[i];
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td>@m.FullName</td>
+                            <td>@m.Grade</td>
+                            <td>@m.PositionOnTheirListAllSchool</td>
+                            <td>@m.CompatibilityIndex</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- Start female grade-only -->
+
+            <div class="page-header">
+                <h1>Your Grade</h1>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>How You Rank For Them</th>
+                        <th>Compatibility Index</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.YourGradeFemales.Count(); i++ )
+                    {
+                        var m = Model.YourGradeFemales[i];
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td>@m.FullName</td>
+                            <td>@m.Grade</td>
+                            <td>@m.PositionOnTheirListYourGrade</td>
+                            <td>@m.CompatibilityIndex</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    
+        </div>
+    </div>
+</div>
+
+

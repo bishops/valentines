@@ -69,9 +69,6 @@ namespace valentines.Models
     partial void InsertOpenIDWhiteList(OpenIDWhiteList instance);
     partial void UpdateOpenIDWhiteList(OpenIDWhiteList instance);
     partial void DeleteOpenIDWhiteList(OpenIDWhiteList instance);
-    partial void InsertMatch(Match instance);
-    partial void UpdateMatch(Match instance);
-    partial void DeleteMatch(Match instance);
     partial void InsertOneTimeRegistrationCode(OneTimeRegistrationCode instance);
     partial void UpdateOneTimeRegistrationCode(OneTimeRegistrationCode instance);
     partial void DeleteOneTimeRegistrationCode(OneTimeRegistrationCode instance);
@@ -90,6 +87,9 @@ namespace valentines.Models
     partial void InsertQuestion(Question instance);
     partial void UpdateQuestion(Question instance);
     partial void DeleteQuestion(Question instance);
+    partial void InsertMatch(Match instance);
+    partial void UpdateMatch(Match instance);
+    partial void DeleteMatch(Match instance);
     #endregion
 		
 		public ValentinesDataContext() : 
@@ -226,14 +226,6 @@ namespace valentines.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Match> Matches
-		{
-			get
-			{
-				return this.GetTable<Match>();
-			}
-		}
-		
 		public System.Data.Linq.Table<OneTimeRegistrationCode> OneTimeRegistrationCodes
 		{
 			get
@@ -279,6 +271,14 @@ namespace valentines.Models
 			get
 			{
 				return this.GetTable<Question>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Match> Matches
+		{
+			get
+			{
+				return this.GetTable<Match>();
 			}
 		}
 	}
@@ -2743,11 +2743,11 @@ namespace valentines.Models
 		
 		private EntitySet<Response> _Responses;
 		
+		private EntitySet<UserOpenId> _UserOpenIds;
+		
 		private EntitySet<Match> _Matches;
 		
-		private EntityRef<Match> _Match;
-		
-		private EntitySet<UserOpenId> _UserOpenIds;
+		private EntitySet<Match> _Matches1;
 		
 		private EntityRef<aspnet_Application> _aspnet_Application;
 		
@@ -2778,9 +2778,9 @@ namespace valentines.Models
 			this._aspnet_Profile = default(EntityRef<aspnet_Profile>);
 			this._aspnet_UsersInRoles = new EntitySet<aspnet_UsersInRole>(new Action<aspnet_UsersInRole>(this.attach_aspnet_UsersInRoles), new Action<aspnet_UsersInRole>(this.detach_aspnet_UsersInRoles));
 			this._Responses = new EntitySet<Response>(new Action<Response>(this.attach_Responses), new Action<Response>(this.detach_Responses));
-			this._Matches = new EntitySet<Match>(new Action<Match>(this.attach_Matches), new Action<Match>(this.detach_Matches));
-			this._Match = default(EntityRef<Match>);
 			this._UserOpenIds = new EntitySet<UserOpenId>(new Action<UserOpenId>(this.attach_UserOpenIds), new Action<UserOpenId>(this.detach_UserOpenIds));
+			this._Matches = new EntitySet<Match>(new Action<Match>(this.attach_Matches), new Action<Match>(this.detach_Matches));
+			this._Matches1 = new EntitySet<Match>(new Action<Match>(this.attach_Matches1), new Action<Match>(this.detach_Matches1));
 			this._aspnet_Application = default(EntityRef<aspnet_Application>);
 			OnCreated();
 		}
@@ -3026,6 +3026,19 @@ namespace valentines.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_UserOpenId", Storage="_UserOpenIds", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<UserOpenId> UserOpenIds
+		{
+			get
+			{
+				return this._UserOpenIds;
+			}
+			set
+			{
+				this._UserOpenIds.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Match", Storage="_Matches", ThisKey="UserId", OtherKey="MatchedUser")]
 		public EntitySet<Match> Matches
 		{
@@ -3039,45 +3052,16 @@ namespace valentines.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Match1", Storage="_Match", ThisKey="UserId", OtherKey="RequestUser", IsUnique=true, IsForeignKey=false)]
-		public Match Match
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Match1", Storage="_Matches1", ThisKey="UserId", OtherKey="RequestUser")]
+		public EntitySet<Match> Matches1
 		{
 			get
 			{
-				return this._Match.Entity;
+				return this._Matches1;
 			}
 			set
 			{
-				Match previousValue = this._Match.Entity;
-				if (((previousValue != value) 
-							|| (this._Match.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Match.Entity = null;
-						previousValue.aspnet_User1 = null;
-					}
-					this._Match.Entity = value;
-					if ((value != null))
-					{
-						value.aspnet_User1 = this;
-					}
-					this.SendPropertyChanged("Match");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_UserOpenId", Storage="_UserOpenIds", ThisKey="UserId", OtherKey="UserId")]
-		public EntitySet<UserOpenId> UserOpenIds
-		{
-			get
-			{
-				return this._UserOpenIds;
-			}
-			set
-			{
-				this._UserOpenIds.Assign(value);
+				this._Matches1.Assign(value);
 			}
 		}
 		
@@ -3171,6 +3155,18 @@ namespace valentines.Models
 			entity.aspnet_User = null;
 		}
 		
+		private void attach_UserOpenIds(UserOpenId entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = this;
+		}
+		
+		private void detach_UserOpenIds(UserOpenId entity)
+		{
+			this.SendPropertyChanging();
+			entity.aspnet_User = null;
+		}
+		
 		private void attach_Matches(Match entity)
 		{
 			this.SendPropertyChanging();
@@ -3183,16 +3179,16 @@ namespace valentines.Models
 			entity.aspnet_User = null;
 		}
 		
-		private void attach_UserOpenIds(UserOpenId entity)
+		private void attach_Matches1(Match entity)
 		{
 			this.SendPropertyChanging();
-			entity.aspnet_User = this;
+			entity.aspnet_User1 = this;
 		}
 		
-		private void detach_UserOpenIds(UserOpenId entity)
+		private void detach_Matches1(Match entity)
 		{
 			this.SendPropertyChanging();
-			entity.aspnet_User = null;
+			entity.aspnet_User1 = null;
 		}
 	}
 	
@@ -3730,246 +3726,6 @@ namespace valentines.Models
 					this._IsEnabled = value;
 					this.SendPropertyChanged("IsEnabled");
 					this.OnIsEnabledChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Matches")]
-	public partial class Match : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _RequestUser;
-		
-		private System.Guid _MatchedUser;
-		
-		private double _CompatibilityIndex;
-		
-		private System.DateTime _DateCalculated;
-		
-		private bool _AreSameGrade;
-		
-		private EntityRef<aspnet_User> _aspnet_User;
-		
-		private EntityRef<aspnet_User> _aspnet_User1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRequestUserChanging(System.Guid value);
-    partial void OnRequestUserChanged();
-    partial void OnMatchedUserChanging(System.Guid value);
-    partial void OnMatchedUserChanged();
-    partial void OnCompatibilityIndexChanging(double value);
-    partial void OnCompatibilityIndexChanged();
-    partial void OnDateCalculatedChanging(System.DateTime value);
-    partial void OnDateCalculatedChanged();
-    partial void OnAreSameGradeChanging(bool value);
-    partial void OnAreSameGradeChanged();
-    #endregion
-		
-		public Match()
-		{
-			this._aspnet_User = default(EntityRef<aspnet_User>);
-			this._aspnet_User1 = default(EntityRef<aspnet_User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestUser", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid RequestUser
-		{
-			get
-			{
-				return this._RequestUser;
-			}
-			set
-			{
-				if ((this._RequestUser != value))
-				{
-					if (this._aspnet_User1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRequestUserChanging(value);
-					this.SendPropertyChanging();
-					this._RequestUser = value;
-					this.SendPropertyChanged("RequestUser");
-					this.OnRequestUserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatchedUser", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid MatchedUser
-		{
-			get
-			{
-				return this._MatchedUser;
-			}
-			set
-			{
-				if ((this._MatchedUser != value))
-				{
-					if (this._aspnet_User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMatchedUserChanging(value);
-					this.SendPropertyChanging();
-					this._MatchedUser = value;
-					this.SendPropertyChanged("MatchedUser");
-					this.OnMatchedUserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompatibilityIndex", DbType="Float NOT NULL")]
-		public double CompatibilityIndex
-		{
-			get
-			{
-				return this._CompatibilityIndex;
-			}
-			set
-			{
-				if ((this._CompatibilityIndex != value))
-				{
-					this.OnCompatibilityIndexChanging(value);
-					this.SendPropertyChanging();
-					this._CompatibilityIndex = value;
-					this.SendPropertyChanged("CompatibilityIndex");
-					this.OnCompatibilityIndexChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCalculated", DbType="DateTime NOT NULL")]
-		public System.DateTime DateCalculated
-		{
-			get
-			{
-				return this._DateCalculated;
-			}
-			set
-			{
-				if ((this._DateCalculated != value))
-				{
-					this.OnDateCalculatedChanging(value);
-					this.SendPropertyChanging();
-					this._DateCalculated = value;
-					this.SendPropertyChanged("DateCalculated");
-					this.OnDateCalculatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AreSameGrade", DbType="Bit NOT NULL")]
-		public bool AreSameGrade
-		{
-			get
-			{
-				return this._AreSameGrade;
-			}
-			set
-			{
-				if ((this._AreSameGrade != value))
-				{
-					this.OnAreSameGradeChanging(value);
-					this.SendPropertyChanging();
-					this._AreSameGrade = value;
-					this.SendPropertyChanged("AreSameGrade");
-					this.OnAreSameGradeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Match", Storage="_aspnet_User", ThisKey="MatchedUser", OtherKey="UserId", IsForeignKey=true)]
-		public aspnet_User aspnet_User
-		{
-			get
-			{
-				return this._aspnet_User.Entity;
-			}
-			set
-			{
-				aspnet_User previousValue = this._aspnet_User.Entity;
-				if (((previousValue != value) 
-							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._aspnet_User.Entity = null;
-						previousValue.Matches.Remove(this);
-					}
-					this._aspnet_User.Entity = value;
-					if ((value != null))
-					{
-						value.Matches.Add(this);
-						this._MatchedUser = value.UserId;
-					}
-					else
-					{
-						this._MatchedUser = default(System.Guid);
-					}
-					this.SendPropertyChanged("aspnet_User");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Match1", Storage="_aspnet_User1", ThisKey="RequestUser", OtherKey="UserId", IsForeignKey=true)]
-		public aspnet_User aspnet_User1
-		{
-			get
-			{
-				return this._aspnet_User1.Entity;
-			}
-			set
-			{
-				aspnet_User previousValue = this._aspnet_User1.Entity;
-				if (((previousValue != value) 
-							|| (this._aspnet_User1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._aspnet_User1.Entity = null;
-						previousValue.Match = null;
-					}
-					this._aspnet_User1.Entity = value;
-					if ((value != null))
-					{
-						value.Match = this;
-						this._RequestUser = value.UserId;
-					}
-					else
-					{
-						this._RequestUser = default(System.Guid);
-					}
-					this.SendPropertyChanged("aspnet_User1");
 				}
 			}
 		}
@@ -4794,6 +4550,294 @@ namespace valentines.Models
 		{
 			this.SendPropertyChanging();
 			entity.Question = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Matches")]
+	public partial class Match : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _RequestUser;
+		
+		private System.Guid _MatchedUser;
+		
+		private double _CompatibilityIndex;
+		
+		private System.DateTime _DateCalculated;
+		
+		private bool _AreSameGrade;
+		
+		private bool _MatchedSex;
+		
+		private int _MatchId;
+		
+		private EntityRef<aspnet_User> _aspnet_User;
+		
+		private EntityRef<aspnet_User> _aspnet_User1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRequestUserChanging(System.Guid value);
+    partial void OnRequestUserChanged();
+    partial void OnMatchedUserChanging(System.Guid value);
+    partial void OnMatchedUserChanged();
+    partial void OnCompatibilityIndexChanging(double value);
+    partial void OnCompatibilityIndexChanged();
+    partial void OnDateCalculatedChanging(System.DateTime value);
+    partial void OnDateCalculatedChanged();
+    partial void OnAreSameGradeChanging(bool value);
+    partial void OnAreSameGradeChanged();
+    partial void OnMatchedSexChanging(bool value);
+    partial void OnMatchedSexChanged();
+    partial void OnMatchIdChanging(int value);
+    partial void OnMatchIdChanged();
+    #endregion
+		
+		public Match()
+		{
+			this._aspnet_User = default(EntityRef<aspnet_User>);
+			this._aspnet_User1 = default(EntityRef<aspnet_User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestUser", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid RequestUser
+		{
+			get
+			{
+				return this._RequestUser;
+			}
+			set
+			{
+				if ((this._RequestUser != value))
+				{
+					if (this._aspnet_User1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRequestUserChanging(value);
+					this.SendPropertyChanging();
+					this._RequestUser = value;
+					this.SendPropertyChanged("RequestUser");
+					this.OnRequestUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatchedUser", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid MatchedUser
+		{
+			get
+			{
+				return this._MatchedUser;
+			}
+			set
+			{
+				if ((this._MatchedUser != value))
+				{
+					if (this._aspnet_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMatchedUserChanging(value);
+					this.SendPropertyChanging();
+					this._MatchedUser = value;
+					this.SendPropertyChanged("MatchedUser");
+					this.OnMatchedUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CompatibilityIndex", DbType="Float NOT NULL")]
+		public double CompatibilityIndex
+		{
+			get
+			{
+				return this._CompatibilityIndex;
+			}
+			set
+			{
+				if ((this._CompatibilityIndex != value))
+				{
+					this.OnCompatibilityIndexChanging(value);
+					this.SendPropertyChanging();
+					this._CompatibilityIndex = value;
+					this.SendPropertyChanged("CompatibilityIndex");
+					this.OnCompatibilityIndexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCalculated", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCalculated
+		{
+			get
+			{
+				return this._DateCalculated;
+			}
+			set
+			{
+				if ((this._DateCalculated != value))
+				{
+					this.OnDateCalculatedChanging(value);
+					this.SendPropertyChanging();
+					this._DateCalculated = value;
+					this.SendPropertyChanged("DateCalculated");
+					this.OnDateCalculatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AreSameGrade", DbType="Bit NOT NULL")]
+		public bool AreSameGrade
+		{
+			get
+			{
+				return this._AreSameGrade;
+			}
+			set
+			{
+				if ((this._AreSameGrade != value))
+				{
+					this.OnAreSameGradeChanging(value);
+					this.SendPropertyChanging();
+					this._AreSameGrade = value;
+					this.SendPropertyChanged("AreSameGrade");
+					this.OnAreSameGradeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatchedSex", DbType="Bit NOT NULL")]
+		public bool MatchedSex
+		{
+			get
+			{
+				return this._MatchedSex;
+			}
+			set
+			{
+				if ((this._MatchedSex != value))
+				{
+					this.OnMatchedSexChanging(value);
+					this.SendPropertyChanging();
+					this._MatchedSex = value;
+					this.SendPropertyChanged("MatchedSex");
+					this.OnMatchedSexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MatchId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MatchId
+		{
+			get
+			{
+				return this._MatchId;
+			}
+			set
+			{
+				if ((this._MatchId != value))
+				{
+					this.OnMatchIdChanging(value);
+					this.SendPropertyChanging();
+					this._MatchId = value;
+					this.SendPropertyChanged("MatchId");
+					this.OnMatchIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Match", Storage="_aspnet_User", ThisKey="MatchedUser", OtherKey="UserId", IsForeignKey=true)]
+		public aspnet_User aspnet_User
+		{
+			get
+			{
+				return this._aspnet_User.Entity;
+			}
+			set
+			{
+				aspnet_User previousValue = this._aspnet_User.Entity;
+				if (((previousValue != value) 
+							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._aspnet_User.Entity = null;
+						previousValue.Matches.Remove(this);
+					}
+					this._aspnet_User.Entity = value;
+					if ((value != null))
+					{
+						value.Matches.Add(this);
+						this._MatchedUser = value.UserId;
+					}
+					else
+					{
+						this._MatchedUser = default(System.Guid);
+					}
+					this.SendPropertyChanged("aspnet_User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_Match1", Storage="_aspnet_User1", ThisKey="RequestUser", OtherKey="UserId", IsForeignKey=true)]
+		public aspnet_User aspnet_User1
+		{
+			get
+			{
+				return this._aspnet_User1.Entity;
+			}
+			set
+			{
+				aspnet_User previousValue = this._aspnet_User1.Entity;
+				if (((previousValue != value) 
+							|| (this._aspnet_User1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._aspnet_User1.Entity = null;
+						previousValue.Matches1.Remove(this);
+					}
+					this._aspnet_User1.Entity = value;
+					if ((value != null))
+					{
+						value.Matches1.Add(this);
+						this._RequestUser = value.UserId;
+					}
+					else
+					{
+						this._RequestUser = default(System.Guid);
+					}
+					this.SendPropertyChanged("aspnet_User1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
