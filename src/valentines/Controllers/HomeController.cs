@@ -25,7 +25,8 @@ namespace valentines.Controllers
             ViewBag.curPage = "Home";
             var db = Current.DB;
 
-            if (db.Responses.Where(r => r.UserId == Current.UserID.Value) != null) // responses already exist for this user
+            var responses = db.Responses.Where(r => r.UserId == Current.UserID.Value);
+            if (responses.Any()) // responses already exist for this user
             {
                 return RedirectToAction("AlreadySubmitted"); // show thank you screen
             }

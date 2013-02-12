@@ -7,36 +7,29 @@
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<h1 class="ac">The Bishop's School Valentine's Day Survey</h1>
-				<h2 class="ac">Fill out the form below to get your matches!</h2>
+				<h1 class="ac" style="color:#CA278C;"><i class="icon-heart icon-large"></i> Valentine's Day Survey <i class="icon-heart icon-large"></i></h1>
+				<h3 class="ac">Fill out the form below to get your matches!</h3>
+                <p class="muted ac" style="font-style:italic">Form closes on @ViewBag.formCloses.ToShortDateString()</p>
 			</div>
 		</div>
 	</div>
 </div>
 }
 
+
 <div class="row">
 	<div class="span9">
-        @if (ViewBag.alreadySubmitted)
-        {
-            <p>Thank you for submitting the survey! Results will be available soon.</p>
-        }
-        else
-        { 
-            <p>The form closes on @ViewBag.formCloses.ToShortDateString() - please submit by then!</p>
-        }
 
 		@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
   {
-			@Html.ValidationSummary("Whoops! Please correct the errors and try again.")
+			@Html.ValidationSummary("Whoops! Please correct the errors and try again.");
 
-            @foreach(var q in Model.Questions)
-            { 
+            foreach(var q in Model.Questions.OrderBy(q=>q.qID)) { 
 			    <div class="control-group">
 				    <label class="control-label" for="q-@q.qID">Question @q.qID</label>
 				    <div class="controls">
-                        <p>@q.Text</p>
-                        @foreach (var a in q.Answers)
+                        <p style="padding-top: 5px;"><b>@q.Text</b></p>
+                        @foreach (var a in q.Answers.OrderBy(a=>a.AnswerOrder))
                         { 
                             <label class="radio">
                                 @if(ViewBag.alreadySubmitted)
@@ -54,12 +47,22 @@
 			    </div>
             }
   
-            @if (!ViewBag.alreadySubmitted)
-            {
+            if (!ViewBag.alreadySubmitted) {
 			    <div class="form-actions">
-				    <button type="submit" class="btn btn-large btn-primary">Submit form (no undo)</button>
+				    <button type="submit" class="btn btn-large btn-info">Submit</button>
+                    <span class="help-inline">There is no undo!</span>
 			    </div>
             }
     }
 	</div>
+    <div class="span3">
+            @if (ViewBag.alreadySubmitted)
+        {
+            <h4 class="ac">Thank you for submitting the survey!</h4><p>Results will be available soon.</p>
+        }
+        else
+        { 
+            <h4 class="ac">Please submit by @ViewBag.formCloses.ToShortDateString()!</h4>
+        }
+    </div>
 </div>

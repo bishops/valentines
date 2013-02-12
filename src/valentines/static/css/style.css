@@ -188,7 +188,7 @@ h3.announcement
 }
 
 footer {
-    background-color: #f5f5f5; /* 252525 */
+    background-color: white; /* #f5f5f5; not 252525 */
     color: #999;
 }
 

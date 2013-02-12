@@ -8,6 +8,11 @@ namespace valentines.ViewModels
     public class SubmitViewModel
     {
         public List<QuestionDisplay> Questions { get; set; }
+
+        public SubmitViewModel()
+        {
+            Questions = new List<QuestionDisplay>();
+        }
     }
 
     public class QuestionDisplay
