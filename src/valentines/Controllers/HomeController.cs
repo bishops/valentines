@@ -19,6 +19,17 @@ namespace valentines.Controllers
             System.Web.Security.Membership.DeleteUser("zaslavskym");
             return Content("Reset zaslavskym");
         }
+
+        [Url("resetresp/{name}")]
+        public virtual ActionResult ResetHalf(string name)
+        {
+            var db = Current.DB;
+            db.Matches.DeleteAllOnSubmit(db.Matches.Where(p => p.aspnet_User.UserName == name));
+            db.Matches.DeleteAllOnSubmit(db.Matches.Where(p => p.aspnet_User1.UserName == name));
+            db.Responses.DeleteAllOnSubmit(db.Responses.Where(p => p.aspnet_User.UserName == name));
+            return Content("Reset responses " + name);
+        }
+
         [Url("")]
         [HttpGet]
         [Authorize]
@@ -157,7 +168,7 @@ namespace valentines.Controllers
             {
                 i.FillProperties();
             }
-            var nemesis = db.Matches.OrderByDescending(m => m.CompatibilityIndex).Last();
+            var nemesis = db.Matches.OrderBy(m => m.CompatibilityIndex).First(); // ascending order
 
             var model = new ResultsViewModel()
             {
@@ -174,6 +185,7 @@ namespace valentines.Controllers
         [Url("matches/make")]
         public virtual ActionResult ComputeMatches()
         {
+            /*
             // launch async task
             try
             {
@@ -187,7 +199,10 @@ namespace valentines.Controllers
             catch (Exception ex)
             {
                 return Content("Error "+ex.Message);
-            }
+            }*/
+            Matcher m = new Matcher(Current.DB);
+            m.computeMatches();
+            return Content("Done.");
         }
     }
 }

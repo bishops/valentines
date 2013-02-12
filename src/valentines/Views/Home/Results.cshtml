@@ -7,15 +7,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<h1 class="ac" style="color:#CA278C;"><i class="icon-heart icon-large"></i> Your Matches <i class="icon-heart icon-large"></i></h1>
+				<h1 class="ac" style="color:#CA278C;">Your Matches</h1>
 			</div>
 		</div>
 	</div>
 </div>
 }
 
+@section ScriptContentAtEndOfBody {
+
+$('#myTab a').click(function (e) {
+  e.preventDefault();
+  $(this).tab('show');
+})
+
+}
+
 <div class="tabbable">
-    <ul class="nav nav-tabs">
+    <ul id="myTab" class="nav nav-tabs">
       <li class="active">
         <a href="#male" data-toggle="tab">Male</a>
       </li>
