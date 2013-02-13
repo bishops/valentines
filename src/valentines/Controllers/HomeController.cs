@@ -242,7 +242,11 @@ namespace valentines.Controllers
 
             foreach (string role in Roles.GetAllRoles())
             {
-                Roles.RemoveUsersFromRole(Roles.GetUsersInRole(role), role);
+                var users = Roles.GetUsersInRole(role);
+                if (users != null && users.Any())
+                {
+                    Roles.RemoveUsersFromRole(Roles.GetUsersInRole(role), role);
+                }
                 Roles.DeleteRole(role);
             }
 

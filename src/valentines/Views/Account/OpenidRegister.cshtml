@@ -25,6 +25,11 @@
 						@Html.HiddenFor(m=>m.Nickname)
 						@Html.HiddenFor(m=>m.FullName)
 						@Html.HiddenFor(m=>m.EmailAddress)
+                        @Html.HiddenFor(m=>m.GradeSet)
+                        @if(Model.GradeSet)
+                        {
+                            @Html.HiddenFor(m=>m.Grade)
+                        }
 						<div class="control-group">
 							@Html.LabelFor(m => m.Grade, new { @class = "control-label" })
 							<div class="controls">
