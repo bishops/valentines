@@ -222,4 +222,11 @@
       <Association Name="aspnet_User_Match1" Member="aspnet_User1" ThisKey="RequestUser" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.BishopsEmails" Member="BishopsEmails">
+    <Type Name="BishopsEmail">
+      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Grade" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

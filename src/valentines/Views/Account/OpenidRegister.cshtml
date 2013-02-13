@@ -28,7 +28,15 @@
 						<div class="control-group">
 							@Html.LabelFor(m => m.Grade, new { @class = "control-label" })
 							<div class="controls">
-							@Html.Html5TextBoxFor(m => m.Grade, InputTypes.InputType.Number, new { @class = "input-large", min = 9, max=12 })
+                            @if (Model.GradeSet)
+                                {
+                                    @Html.Html5TextBoxFor(m => m.Grade, InputTypes.InputType.Number, new { @class = "input-large", min = 9, max = 12, disabled="disabled" })
+                                }
+                                else
+                                {
+                                    @Html.Html5TextBoxFor(m => m.Grade, InputTypes.InputType.Number, new { @class = "input-large", min = 9, max = 12 })
+                                }
+							
 							@Html.ValidationMessageFor(m => m.Grade)
 						</div></div>
 						<div class="control-group">

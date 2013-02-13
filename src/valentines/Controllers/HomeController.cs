@@ -8,28 +8,12 @@ using valentines.Models;
 using valentines.ViewModels;
 using valentines.Helpers;
 using System.Threading;
+using System.Web.Security;
 
 namespace valentines.Controllers
 {
     public partial class HomeController : Controller
     {
-        [Url("reset")]
-        public virtual ActionResult Reset()
-        {
-            System.Web.Security.Membership.DeleteUser("zaslavskym");
-            return Content("Reset zaslavskym");
-        }
-
-        [Url("resetresp/{name}")]
-        public virtual ActionResult ResetHalf(string name)
-        {
-            var db = Current.DB;
-            db.Matches.DeleteAllOnSubmit(db.Matches.Where(p => p.aspnet_User.UserName == name));
-            db.Matches.DeleteAllOnSubmit(db.Matches.Where(p => p.aspnet_User1.UserName == name));
-            db.Responses.DeleteAllOnSubmit(db.Responses.Where(p => p.aspnet_User.UserName == name));
-            return Content("Reset responses " + name);
-        }
-
         [Url("")]
         [HttpGet]
         [Authorize]
@@ -185,7 +169,13 @@ namespace valentines.Controllers
         [Url("matches/make")]
         public virtual ActionResult ComputeMatches()
         {
-            /*
+#if DEBUG
+            // do everything synchronously - warning: timeouts!
+            Matcher m = new Matcher(Current.DB);
+            m.computeMatches();
+            return Content("Done.");
+            
+#else
             // launch async task
             try
             {
@@ -198,11 +188,85 @@ namespace valentines.Controllers
             }
             catch (Exception ex)
             {
-                return Content("Error "+ex.Message);
-            }*/
-            Matcher m = new Matcher(Current.DB);
-            m.computeMatches();
+                return Content("Error " + ex.Message);
+            }
+#endif
+        }
+
+        #region Administrative Tasks
+
+        [Url("reset")]
+        public virtual ActionResult Reset()
+        {
+            if (System.Configuration.ConfigurationManager.AppSettings["AllowResetOrElevate"] != "true")
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            System.Web.Security.Membership.DeleteUser("zaslavskym");
+            return Content("Reset zaslavskym");
+        }
+
+        [Url("resetresp/{name}")]
+        public virtual ActionResult ResetHalf(string name)
+        {
+            if (System.Configuration.ConfigurationManager.AppSettings["AllowResetOrElevate"] != "true")
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            var db = Current.DB;
+            db.Matches.DeleteAllOnSubmit(db.Matches.Where(p => p.aspnet_User.UserName == name));
+            db.Matches.DeleteAllOnSubmit(db.Matches.Where(p => p.aspnet_User1.UserName == name));
+            db.Responses.DeleteAllOnSubmit(db.Responses.Where(p => p.aspnet_User.UserName == name));
+            return Content("Reset responses " + name);
+        }
+
+        [Url("reset/all")]
+        public virtual ActionResult ResetAll()
+        {
+            if (System.Configuration.ConfigurationManager.AppSettings["AllowResetOrElevate"] != "true")
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+
+            new AccountController().FormsAuth.SignOut(); // otherwise auth cookie will persist if we're logged in and then we won't have a userID but Request.IsAuthenticated will still be true.
+
+            var db = Current.DB;
+            db.Matches.DeleteAllOnSubmit(db.Matches); // clear all rows
+            db.SubmitChanges();
+
+            db.Responses.DeleteAllOnSubmit(db.Responses);
+            db.SubmitChanges();
+
+            db.UserOpenIds.DeleteAllOnSubmit(db.UserOpenIds);
+            db.SubmitChanges();
+
+            foreach (string role in Roles.GetAllRoles())
+            {
+                Roles.RemoveUsersFromRole(Roles.GetUsersInRole(role), role);
+                Roles.DeleteRole(role);
+            }
+
+            foreach (MembershipUser u in Membership.GetAllUsers())
+            {
+                Membership.DeleteUser(u.UserName, true);
+            }
+
+            Roles.CreateRole("Administrator");
+
+            return Content("Done");
+        }
+
+        [Url("reset/admin")]
+        public virtual ActionResult ElevateMZ()
+        {
+            if (System.Configuration.ConfigurationManager.AppSettings["AllowResetOrElevate"] != "true")
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            Roles.AddUserToRole("zaslavskym", "Administrator");
             return Content("Done.");
         }
+
+        #endregion
     }
 }

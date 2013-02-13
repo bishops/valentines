@@ -7,6 +7,12 @@ This code is licenced under the New BSD License.
 
 var providers_large = {
     bishops: {
+        id: 'bishops',
+		file: 'bishops.gif',
+		name: "The Bishop's School Student Email",
+		url: 'https://www.google.com/accounts/o8/id',
+	}/*,
+    bishops: {
 		id: 'bishops',
 		file: 'bishops.gif',
 		name: "The Bishop's School Student Email",
@@ -17,7 +23,7 @@ var providers_large = {
 		file: 'google.gif',
 		name: 'Google',
 		url: 'https://www.google.com/accounts/o8/id',
-	}/*,
+	},
 	yahoo: {
 		id: 'yahoo',
 		name: 'Yahoo',

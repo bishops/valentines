@@ -24,10 +24,10 @@
 		</div>
 	}
 	<div>
-		<p>To log in or register, select your <a href="http://openid.net/what/">OpenID account provider</a> below.</p>
+		<p>To log in or register, click the Bishops logo below, then login with your bishopsstudent.org email account.<!--select your <a href="http://openid.net/what/">OpenID account provider</a> below.--></p>
 	</div>
 	<div class="form-error">
-    <p>@ViewData["Message"]</p>
+    <h3>@ViewData["Message"]</h3>
 	</div>
 	<form id="openid_form" action="@Url.Action("Authenticate","Account")" method="post">       
 			@if((ViewData["OneTimeSignupCode"] as string).HasValue()) { @Html.Hidden("OneTimeSignupCode",ViewData["OneTimeSignupCode"] as string) }

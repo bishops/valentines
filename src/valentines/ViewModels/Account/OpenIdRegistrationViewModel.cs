@@ -93,5 +93,7 @@ namespace valentines.ViewModels
             set;
         }
 
+
+        public bool GradeSet { get; set; }
     }
 }

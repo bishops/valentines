@@ -32,7 +32,8 @@ namespace valentines.Controllers
     public partial class AccountController : CustomControllerBase
     {
         private static readonly OpenIdRelyingParty openid = new OpenIdRelyingParty();
-        static bool LimitToBishopsOpenIds = false;
+        static bool LimitToBishopsOpenIds = true;
+        static bool LimitToUpperSchool = true;
 
         protected override void Initialize(RequestContext requestContext)
         {
@@ -246,7 +247,7 @@ namespace valentines.Controllers
                                 {
                                     if (LimitToBishopsOpenIds)
                                     {
-                                        ViewData["Message"] = "Please login with your Bishop's student email address!";
+                                        ViewData["Message"] = "Please try again and use your Bishop's student email address!";
                                         return View("OpenidLogin");
                                     }
                                     var potentialNick = sreg.GetAttributeValue(WellKnownAttributes.Name.Alias);
@@ -269,34 +270,76 @@ namespace valentines.Controllers
                                 
                                 name = sreg.GetAttributeValue(WellKnownAttributes.Name.First) + " " + sreg.GetAttributeValue(WellKnownAttributes.Name.Last);
                             }
+
+                            // Check in Bishop's class lists (9th to 12th grades) to see if we should allow this user to join (and also fetch their grade level)
+                            var lookup = db.BishopsEmails.Where(b => b.Username == login).FirstOrDefault();
+                            var grade = 9; // default
+                            var gradeSet = false; // should we make grade field disabled in registration form (true = we set grade here and user cannot change, false = user must provide manually)
+                            if (lookup == null)
+                            {
+                                if (LimitToUpperSchool)
+                                {
+                                    ViewData["Message"] = "Sorry, but only Upper School students may join the site.";
+                                    return View("OpenidLogin");
+                                }
+                            }
+                            else
+                            {
+                                grade = lookup.Grade;
+                                gradeSet = true;
+                            }
+                            
                             var model = new OpenIdRegistrationViewModel()
                             {
                                 EmailAddress = email,
                                 Nickname = login,
                                 FullName = name,
+                                Grade = grade,
+                                GradeSet = gradeSet,
                                 OpenIdClaim = Crypto.EncryptStringAES(response.ClaimedIdentifier.ToString(), "secretstring"),
                                 ReturnURL = Session["ReturnURL"] as string
                             };
                             return View("OpenidRegister", model);
                         }
-                        else
+                        else // openId record is not null
                         {
                             var userName = openId.aspnet_User.UserName;
 
                             FormsAuthentication.SetAuthCookie(userName, true);
-                            var URLreturn = Session["ReturnURL"];
+
+                            // Don't use return URL because the user may have accidentally clicked "results" nav link before logging in while results page isn't open yet.
+                            /*var URLreturn = Session["ReturnURL"];
                             if (URLreturn == null || !(URLreturn as string).HasValue())
                             {
                                 return RedirectToAction("Index", "Home");
                             }
-                            return Redirect(URLreturn as string);
+                            return Redirect(URLreturn as string);*/
+
+                            // Decide where to go next
+                            if (System.Configuration.ConfigurationManager.AppSettings["ResultsOpen"] != "true")
+                            {
+                                return RedirectToAction("Index", "Home"); // Send to questionnaire page.
+                            }
+                            else
+                            {
+                                return RedirectToAction("Results", "Home"); // Send to results page (if they haven't submitted, it will redirect to form-is-closed page
+                            }
                         }
 
                     case AuthenticationStatus.Canceled:
+#if DEBUG
                         ViewData["Message"] = "Canceled at provider";
+#else
+                        ViewData["Message"] = "Canceled - please try again!";
+#endif
                         return View("OpenidLogin");
                     case AuthenticationStatus.Failed:
+#if DEBUG
                         ViewData["Message"] = response.Exception.Message;
+#else
+                        ViewData["Message"] = "Sorry, something went wrong. Please try again!";
+#endif
+         
                         return View("OpenidLogin");
                 }
             }
@@ -382,11 +425,20 @@ namespace valentines.Controllers
                         }
                         else
                         {
-                            if (model.ReturnURL.HasValue())
+                            /*if (model.ReturnURL.HasValue())
                             {
                                 return Redirect(model.ReturnURL);
+                            }*/
+
+                            // Decide where to go next
+                            if (System.Configuration.ConfigurationManager.AppSettings["ResultsOpen"] != "true")
+                            {
+                                return RedirectToAction("Index", "Home"); // Send to questionnaire page.
                             }
-                            return RedirectToAction("Index", "Home");
+                            else
+                            {
+                                return RedirectToAction("Results", "Home"); // Send to results page (if they haven't submitted, it will redirect to form-is-closed page
+                            }
                         }
                     }
 

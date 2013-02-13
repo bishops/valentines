@@ -382,10 +382,10 @@
       <LastGenOutput>Valentines.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="static\font\fontawesome-webfont.eot" />
-    <None Include="static\font\fontawesome-webfont.ttf" />
-    <None Include="static\font\fontawesome-webfont.woff" />
-    <None Include="static\font\FontAwesome.otf" />
+    <Content Include="static\font\fontawesome-webfont.eot" />
+    <Content Include="static\font\fontawesome-webfont.ttf" />
+    <Content Include="static\font\fontawesome-webfont.woff" />
+    <Content Include="static\font\FontAwesome.otf" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC1.cs</LastGenOutput>
