@@ -33,11 +33,24 @@ namespace valentines.Models
             int scoreSame = 0;
             foreach (var q in db.Questions)
             {
-                var ansone = db.Responses.Where(u => u.UserId == one.UserId && u.QuestionId == q.Id).SingleOrDefault().AnswerId;
-                var anstwo = db.Responses.Where(u => u.UserId == two.UserId && u.QuestionId == q.Id).SingleOrDefault().AnswerId;
-                if (ansone == anstwo)
+                try
                 {
-                    scoreSame++;
+                    var ansone = db.Responses.Where(u => u.UserId == one.UserId && u.QuestionId == q.Id).SingleOrDefault().AnswerId;
+                    var anstwo = db.Responses.Where(u => u.UserId == two.UserId && u.QuestionId == q.Id).SingleOrDefault().AnswerId;
+                    if (ansone == anstwo)
+                    {
+                        scoreSame++;
+                    }
+                }
+                catch (NullReferenceException e)
+                {
+                    // If there was an error above, that means that one of them didn't answer the question because SingleOrDefault() returned null
+                    // They can't answer only some of the questions and not the rest, so we don't need to check other questions
+                    break; // keep scoreSame at 0, don't check other questions
+                }
+                catch
+                {
+                    // Other exception... uh, idk. Let it continue.
                 }
             }
             var ratio = ((double)scoreSame) / totalNumQuestions;
