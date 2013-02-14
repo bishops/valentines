@@ -30,7 +30,7 @@ namespace valentines.Models
         {
             // Compute
             var totalNumQuestions = db.Questions.Count();
-            var scoreSame = 0;
+            int scoreSame = 0;
             foreach (var q in db.Questions)
             {
                 var ansone = db.Responses.Where(u => u.UserId == one.UserId && u.QuestionId == q.Id).SingleOrDefault().AnswerId;
@@ -40,16 +40,16 @@ namespace valentines.Models
                     scoreSame++;
                 }
             }
-            double ratio = scoreSame / totalNumQuestions;
+            var ratio = ((double)scoreSame) / totalNumQuestions;
 
             // Add noise
-            var noiseInt = new Random().Next(1, 20);
+            var noiseInt = new Random().Next(1, 10); // 1% to 10% noise
             if (new Random().Next(0, 1) == 1)
             {
-                noiseInt *= -1;
+                noiseInt *= -1; // add or subtract
             }
-            double noise = (double)noiseInt * 100;
-            if (ratio + noise > 1 || ratio + noise < 0)
+            double noise = (double)noiseInt / 100; 
+            if (ratio + noise > 1 || ratio + noise < 0) // we want to limit to between 0 and 1
             {
                 noise *= -1;
             }
@@ -111,7 +111,7 @@ namespace valentines.Models
 
         public void FillProperties()
         {
-            var profile = AccountProfile.GetProfileOfUser(this.aspnet_User1.UserName);
+            var profile = AccountProfile.GetProfileOfUser(this.aspnet_User.UserName); // the matched user
             FullName = profile.FullName;
             Grade = profile.Grade;
 
@@ -123,7 +123,7 @@ namespace valentines.Models
             }
 
             // All school for whatever gender you are
-            var allSchoolYourGender = this.aspnet_User1.Matches.Where(m => m.MatchedSex == selectedSex).OrderByDescending(m => m.CompatibilityIndex);
+            var allSchoolYourGender = this.aspnet_User.Matches1.Where(m => m.MatchedSex == selectedSex).OrderByDescending(m => m.CompatibilityIndex); // get their list
             // Figure out your position
             var result = allSchoolYourGender
                 .Select((x, i) => new { Item = x, Index = i })
@@ -132,7 +132,7 @@ namespace valentines.Models
 
             int index = -1;
             if (result != null)
-                index = result.Index;
+                index = result.Index + 1; // index is zero-based, but we want to present list as starting with index 1.
             PositionOnTheirListAllSchool = index;
 
             if (!this.AreSameGrade)
@@ -142,7 +142,7 @@ namespace valentines.Models
             else
             {
                 // Your grade for whatever gender you are
-                var yourGradeYourGender = this.aspnet_User1.Matches.Where(m => m.MatchedSex == selectedSex && m.AreSameGrade==true).OrderByDescending(m => m.CompatibilityIndex);
+                var yourGradeYourGender = this.aspnet_User.Matches1.Where(m => m.MatchedSex == selectedSex && m.AreSameGrade==true).OrderByDescending(m => m.CompatibilityIndex);
                 // Figure out your position
                 var resultG = allSchoolYourGender
                     .Select((x, i) => new { Item = x, Index = i })
@@ -151,7 +151,7 @@ namespace valentines.Models
 
                 int indexG = -1;
                 if (resultG != null)
-                    indexG = resultG.Index;
+                    indexG = resultG.Index + 1; // index is zero-based, but we want to present list as starting with index 1.
                 PositionOnTheirListYourGrade = indexG;
             }
         }

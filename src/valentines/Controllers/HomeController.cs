@@ -124,7 +124,7 @@ namespace valentines.Controllers
             }
 
             var db = Current.DB;
-            var matches = db.Matches.Where(m => m.RequestUser == Current.UserID.Value);
+            var matches = db.Matches.Where(m => m.RequestUser == Current.UserID.Value).OrderByDescending(m => m.CompatibilityIndex).ToList();
             if (!matches.Any()) // no rows returned
             {
                 // Must not have submitted the form :(
@@ -132,27 +132,28 @@ namespace valentines.Controllers
             }
 
             // matchedsex=false is male, matchedsex=true is female
-            var allSchoolMales = db.Matches.Where(m => m.MatchedSex == false).OrderByDescending(m=>m.CompatibilityIndex).Take(5).ToList();
+            var allSchoolMales = matches.Where(m => m.MatchedSex == false).Take(5).ToList();
             foreach (var i in allSchoolMales)
             {
                 i.FillProperties();
             }
-            var allSchoolFemales = db.Matches.Where(m => m.MatchedSex == true).OrderByDescending(m => m.CompatibilityIndex).Take(5).ToList();
+            var allSchoolFemales = matches.Where(m => m.MatchedSex == true).Take(5).ToList();
             foreach (var i in allSchoolFemales)
             {
                 i.FillProperties();
             }
-            var yourGradeMales = db.Matches.Where(m => m.MatchedSex == false && m.AreSameGrade == true).OrderByDescending(m => m.CompatibilityIndex).Take(5).ToList();
+            var yourGradeMales = matches.Where(m => m.MatchedSex == false && m.AreSameGrade == true).Take(5).ToList();
             foreach (var i in yourGradeMales)
             {
                 i.FillProperties();
             }
-            var yourGradeFemales = db.Matches.Where(m => m.MatchedSex == true && m.AreSameGrade == true).OrderByDescending(m => m.CompatibilityIndex).Take(5).ToList();
+            var yourGradeFemales = matches.Where(m => m.MatchedSex == true && m.AreSameGrade == true).Take(5).ToList();
             foreach (var i in yourGradeFemales)
             {
                 i.FillProperties();
             }
             var nemesis = db.Matches.OrderBy(m => m.CompatibilityIndex).First(); // ascending order
+            nemesis.FillProperties();
 
             var model = new ResultsViewModel()
             {

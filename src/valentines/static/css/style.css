@@ -292,30 +292,9 @@ blockquote.big-quote small
 	opacity:.5;
 }
 
-.infoTitle
-{
-	color: #C06;
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-}
 small
 {
-	font-family: 'Chicle', cursive;
 	font-size:16px;
-}
-/*.copyright
-{
-    font-family: 'Chicle', cursive;
-    font-size: 14px;
-    padding-top: 1em;
-}*/
-.foot-social-buttons
-{
-    padding-top: 1em;
-}
-.endwell h3, .footerbtn
-{
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-	font-size: 24px;
 }
 
 #subwrap

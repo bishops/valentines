@@ -1,4 +1,5 @@
-﻿@model valentines.ViewModels.ResultsViewModel
+﻿@using System.Globalization
+@model valentines.ViewModels.ResultsViewModel
 @{
 	ViewBag.Title = "Results";
 }
@@ -14,152 +15,148 @@
 </div>
 }
 
-@section ScriptContentAtEndOfBody {
+	<ul id="tab" class="nav nav-tabs">
+	  <li class="active">
+		<a href="#tab1" data-toggle="tab">Male</a>
+	  </li>
+	  <li><a href="#tab2" data-toggle="tab">Female</a></li>
+	</ul>
 
-$('#myTab a').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-})
+	<div class="tab-content">
+		<div class="tab-pane fade in active" id="tab1">
 
-}
+			<!-- Start male all school -->
 
-<div class="tabbable">
-    <ul id="myTab" class="nav nav-tabs">
-      <li class="active">
-        <a href="#male" data-toggle="tab">Male</a>
-      </li>
-      <li><a href="#female" data-toggle="tab">Female</a></li>
-    </ul>
+			<div class="page-header">
+				<h1>All School</h1>
+			</div>
 
-    <div class="tab-content">
-        <div class="tab-pane fade active" id="male">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Grade</th>
+						<th>How You Rank For Them</th>
+						<th>Compatibility Index</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (int i = 0; i < Model.AllSchoolMales.Count(); i++ )
+					{ 
+						var m = Model.AllSchoolMales[i];
+						<tr>
+							<td>@(i+1)</td>
+							<td>@m.FullName</td> <!-- m.aspnet_User.UserName -->
+							<td>@m.Grade</td>
+							<td>@m.PositionOnTheirListAllSchool</td>
+							<td>@(m.CompatibilityIndex.ToString("00.0%", CultureInfo.InvariantCulture))</td> <!-- original format string: "0.000" -->
+						</tr>
+					}
+				</tbody>
+			</table>
 
-            <!-- Start male all school -->
+			<!-- Start male grade-only -->
 
-            <div class="page-header">
-                <h1>All School</h1>
-            </div>
+			<div class="page-header">
+				<h1>Your Grade</h1>
+			</div>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Grade</th>
-                        <th>How You Rank For Them</th>
-                        <th>Compatibility Index</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.AllSchoolMales.Count(); i++ )
-                    { 
-                        var m = Model.AllSchoolMales[i];
-                        <tr>
-                            <td>@(i+1)</td>
-                            <td>@m.FullName</td>
-                            <td>@m.Grade</td>
-                            <td>@m.PositionOnTheirListAllSchool</td>
-                            <td>@m.CompatibilityIndex</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>How You Rank For Them</th>
+						<th>Compatibility Index</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (int i = 0; i < Model.YourGradeMales.Count(); i++ )
+					{ 
+						var m = Model.YourGradeMales[i];
+						<tr>
+							<td>@(i+1)</td>
+							<td>@m.FullName</td>
+							<td>@m.PositionOnTheirListYourGrade</td>
+							<td>@(m.CompatibilityIndex.ToString("00.0%", CultureInfo.InvariantCulture))</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+	
+		</div>
+		<div class="tab-pane fade" id="tab2">
+		<!-- Start female all school -->
 
-            <!-- Start male grade-only -->
+			<div class="page-header">
+				<h1>All School</h1>
+			</div>
 
-            <div class="page-header">
-                <h1>Your Grade</h1>
-            </div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Grade</th>
+						<th>How You Rank For Them</th>
+						<th>Compatibility Index</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (int i = 0; i < Model.AllSchoolFemales.Count(); i++ )
+					{
+						var m = Model.AllSchoolFemales[i];
+						<tr>
+							<td>@(i+1)</td>
+							<td>@m.FullName</td>
+							<td>@m.Grade</td>
+							<td>@m.PositionOnTheirListAllSchool</td>
+							<td>@(m.CompatibilityIndex.ToString("00.0%", CultureInfo.InvariantCulture))</td>
+						</tr>
+					}
+				</tbody>
+			</table>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>How You Rank For Them</th>
-                        <th>Compatibility Index</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.YourGradeMales.Count(); i++ )
-                    { 
-                        var m = Model.YourGradeMales[i];
-                        <tr>
-                            <td>@(i+1)</td>
-                            <td>@m.FullName</td>
-                            <td>@m.Grade</td>
-                            <td>@m.PositionOnTheirListYourGrade</td>
-                            <td>@m.CompatibilityIndex</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-    
-        </div>
-        <div class="tab-pane fade" id="female">
-        <!-- Start female all school -->
+			<!-- Start female grade-only -->
 
-            <div class="page-header">
-                <h1>All School</h1>
-            </div>
+			<div class="page-header">
+				<h1>Your Grade</h1>
+			</div>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Grade</th>
-                        <th>How You Rank For Them</th>
-                        <th>Compatibility Index</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.AllSchoolFemales.Count(); i++ )
-                    {
-                        var m = Model.AllSchoolFemales[i];
-                        <tr>
-                            <td>@(i+1)</td>
-                            <td>@m.FullName</td>
-                            <td>@m.Grade</td>
-                            <td>@m.PositionOnTheirListAllSchool</td>
-                            <td>@m.CompatibilityIndex</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>How You Rank For Them</th>
+						<th>Compatibility Index</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (int i = 0; i < Model.YourGradeFemales.Count(); i++ )
+					{
+						var m = Model.YourGradeFemales[i];
+						<tr>
+							<td>@(i+1)</td>
+							<td>@m.FullName</td>
+							<td>@m.PositionOnTheirListYourGrade</td>
+							<td>@(m.CompatibilityIndex.ToString("00.0%", CultureInfo.InvariantCulture))</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+	
+		</div>
+	</div>
 
-            <!-- Start female grade-only -->
-
-            <div class="page-header">
-                <h1>Your Grade</h1>
-            </div>
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>How You Rank For Them</th>
-                        <th>Compatibility Index</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.YourGradeFemales.Count(); i++ )
-                    {
-                        var m = Model.YourGradeFemales[i];
-                        <tr>
-                            <td>@(i+1)</td>
-                            <td>@m.FullName</td>
-                            <td>@m.Grade</td>
-                            <td>@m.PositionOnTheirListYourGrade</td>
-                            <td>@m.CompatibilityIndex</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-    
-        </div>
+<hr />
+<div class="well well-large ac" style="margin-top:50px;">
+	<div class="page-header">
+    <h1>Nemesis <small>Your worst match</small></h1>
     </div>
+	<h1 style="font-size: 5em; color:#BE011E;">@Model.Nemesis.FullName</h1>
+    <h2>@(Model.Nemesis.Grade)th Grade</h2>
 </div>
 
 
