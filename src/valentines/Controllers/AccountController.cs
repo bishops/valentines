@@ -32,8 +32,8 @@ namespace valentines.Controllers
     public partial class AccountController : CustomControllerBase
     {
         private static readonly OpenIdRelyingParty openid = new OpenIdRelyingParty();
-        static bool LimitToBishopsOpenIds = false;
-        static bool LimitToUpperSchool = false;
+        static bool LimitToBishopsOpenIds = true;
+        static bool LimitToUpperSchool = true;
 
         protected override void Initialize(RequestContext requestContext)
         {
