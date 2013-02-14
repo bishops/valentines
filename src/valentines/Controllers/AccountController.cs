@@ -232,6 +232,9 @@ namespace valentines.Controllers
                             }
                         }
 
+                        // Poor Eamon forgot his TBS password :(
+                        var bypass = new List<string>();
+                        bypass.Add("eamonjohnston3@gmail.com");
 
                         if (openId == null)
                         {
@@ -245,7 +248,7 @@ namespace valentines.Controllers
                                 var nick = "";
                                 if (email.IndexOf("@bishopsstudent.org") == -1)
                                 {
-                                    if (LimitToBishopsOpenIds)
+                                    if (LimitToBishopsOpenIds && !bypass.Contains(email))
                                     {
                                         ViewData["Message"] = "Please try again and use your Bishop's student email address!";
                                         return View("OpenidLogin");
@@ -277,7 +280,7 @@ namespace valentines.Controllers
                             var gradeSet = false; // should we make grade field disabled in registration form (true = we set grade here and user cannot change, false = user must provide manually)
                             if (lookup == null)
                             {
-                                if (LimitToUpperSchool)
+                                if (LimitToUpperSchool && !bypass.Contains(email))
                                 {
                                     ViewData["Message"] = "Sorry, but only Upper School students may join the site.";
                                     return View("OpenidLogin");
