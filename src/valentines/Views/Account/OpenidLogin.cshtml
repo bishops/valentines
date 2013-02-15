@@ -1,0 +1,73 @@
+﻿@using valentines.Helpers;
+@{
+	ViewBag.Title = "Log In or Register";
+	ViewBag.revNum = valentines.Current.RevNumber();
+	/*
+		* This file Copyright © 2013 Maxim Zaslavsky, http://maximzaslavsky.com
+		* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+		* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+		* THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	*/
+}
+
+<section id="content">
+<div class="page-header">
+		<h1>Log In or Register</h1>
+	</div>
+	<article>
+		<section>
+			@if((ViewData["OneTimeSignupCode"] as string).HasValue())
+	{
+		<div class="one-time-signup-welcome">
+			<h2>Welcome @if((ViewData["WelcomeName"] as string).HasValue()) { @Html.Encode(ViewData["WelcomeName"] as string) } !</h2>
+			<p>You've been invited to join this site. To sign up, please click your OpenID account provider below.</p>
+		</div>
+	}
+	<div>
+		<p>To log in or register, click the Bishops logo below, then login with your bishopsstudent.org email account.<!--select your <a href="http://openid.net/what/">OpenID account provider</a> below.--></p>
+	</div>
+	<div class="form-error">
+    <h3>@ViewData["Message"]</h3>
+	</div>
+	<form id="openid_form" action="@Url.Action("Authenticate","Account")" method="post">       
+			@if((ViewData["OneTimeSignupCode"] as string).HasValue()) { @Html.Hidden("OneTimeSignupCode",ViewData["OneTimeSignupCode"] as string) }
+
+			<div id="openid_choice"> 
+				<div id="openid_btns"></div> 
+			</div> 
+			
+			<div id="openid_input_area"> 
+			</div>  
+
+            <table id="openid-url-input" style="display: none;"> 
+				<tr>            
+					<td class="vt large"><input id="openid_identifier" name="openid_identifier" class="openid-identifier" style="height:28px; width:500px;" tabindex="100"></td> 
+					<td class="vt large"><input id="submit-button" class="btn btn-primary btn-large" type="submit" value="Log in" tabindex="101"></td> 
+				</tr>                                
+				
+ 
+			</table> 
+			
+		   
+			
+		</form> 
+		</section>
+	</article>
+</section>
+
+@section HeadContent
+{
+	<link rel="stylesheet" href="/static/openid/openid.css?@ViewBag.revNum"/>
+}
+
+@section ScriptContentAtEndOfBody
+{
+  <script src="/static/openid/openid-jquery.js?@ViewBag.revNum" type="text/javascript"></script>
+
+  <script type="text/javascript">
+	  $().ready(function () {
+		  openid.init('openid_identifier');
+		  $("#openid_identifier").focus();
+	  });
+  </script> 
+}

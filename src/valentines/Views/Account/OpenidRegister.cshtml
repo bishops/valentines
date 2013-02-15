@@ -1,0 +1,64 @@
+﻿@using System.Web.Mvc.Html5;
+@model valentines.ViewModels.OpenIdRegistrationViewModel
+@{
+	ViewBag.Title = "Register";
+	/*
+		* This file Copyright © 2013 Maxim Zaslavsky, http://maximzaslavsky.com
+		* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+		* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+		* THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	*/
+}
+
+<div class="page-header">
+	<h1>Create an Account</h1>
+</div>
+<div class="row">
+	<div class="span12">
+			<p>Welcome! To create a new account, please fill out the form below.</p>
+			
+			@using (Html.BeginForm("OpenidRegisterFormSubmit", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+			{
+				@Html.ValidationSummary("Account creation was unsuccessful. Please correct the errors and try again.")
+					<fieldset>
+						<legend>Account Information</legend>
+						@Html.HiddenFor(m=>m.Nickname)
+						@Html.HiddenFor(m=>m.FullName)
+						@Html.HiddenFor(m=>m.EmailAddress)
+                        @Html.HiddenFor(m=>m.GradeSet)
+                        @if(Model.GradeSet)
+                        {
+                            @Html.HiddenFor(m=>m.Grade)
+                        }
+						<div class="control-group">
+							@Html.LabelFor(m => m.Grade, new { @class = "control-label" })
+							<div class="controls">
+                            @if (Model.GradeSet)
+                                {
+                                    @Html.Html5TextBoxFor(m => m.Grade, InputTypes.InputType.Number, new { @class = "input-large", min = 9, max = 12, disabled="disabled" })
+                                }
+                                else
+                                {
+                                    @Html.Html5TextBoxFor(m => m.Grade, InputTypes.InputType.Number, new { @class = "input-large", min = 9, max = 12 })
+                                }
+							
+							@Html.ValidationMessageFor(m => m.Grade)
+						</div></div>
+						<div class="control-group">
+							@Html.LabelFor(m => m.SelectedSex, new { @class = "control-label" })
+							<div class="controls">
+							@Html.DropDownListFor(m => m.SelectedSex, Model.Sexes)
+							@Html.ValidationMessageFor(m => m.SelectedSex)
+						</div></div>
+						
+						@Html.HiddenFor(m => m.OpenIdClaim)
+						@Html.HiddenFor(m => m.ReturnURL)
+						@Html.AntiForgeryToken()
+						<div class="form-actions">
+							<input type="submit" class="btn btn-success btn-large" value="Register" />
+							<a href="@Url.Content("~")" class="btn btn-inverse">Cancel</a>
+						</div>
+					</fieldset>
+			}
+	</div>
+</div>
