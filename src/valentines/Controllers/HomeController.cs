@@ -152,7 +152,7 @@ namespace valentines.Controllers
             {
                 i.FillProperties();
             }
-            var nemesis = db.Matches.OrderBy(m => m.CompatibilityIndex).First(); // ascending order
+            var nemesis = db.Matches.OrderBy(m => m.CompatibilityIndex).OrderBy(m=>m.MatchedUser).First(); // ascending order
             nemesis.FillProperties();
 
             var model = new ResultsViewModel()
