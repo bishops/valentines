@@ -21,7 +21,14 @@ namespace valentines.Models
             {
                 for (int j = i + 1; j < ulist.Count; j++)
                 {
-                    MakeMatch(ulist[i], ulist[j]);
+                    try
+                    {
+                        MakeMatch(ulist[i], ulist[j]);
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
         }
