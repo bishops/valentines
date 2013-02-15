@@ -377,6 +377,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Offline.htm.disabled" />
     <None Include="Models\Valentines.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Valentines.designer.cs</LastGenOutput>
